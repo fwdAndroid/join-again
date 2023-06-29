@@ -91,8 +91,10 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                               FirebaseFirestore.instance
                                   .collection("joins")
                                   .doc(document.id)
-                                  .update({"joinedRequest": "denied"}).then(
-                                      (value) {
+                                  .update({
+                                "joinedRequest": "denied",
+                                "number of joins": data['number of joins']--
+                              }).then((value) {
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                     content: Text(
                                         "User Request is denied to join the event")));

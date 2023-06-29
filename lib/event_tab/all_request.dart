@@ -18,6 +18,8 @@ class _AllRequestState extends State<AllRequest> {
       )
       .where("creatorid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
       .snapshots();
+
+  int accept = 0;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -87,49 +89,52 @@ class _AllRequestState extends State<AllRequest> {
                       ),
                     ],
                   ),
-                  subtitle: data['joinid'] ==
-                          FirebaseAuth.instance.currentUser!.uid
-                      ? Text("")
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                                onPressed: () async {
-                                  FirebaseFirestore.instance
-                                      .collection("joins")
-                                      .doc(document.id)
-                                      .update({
-                                    "joinedRequest": "accepted"
-                                  }).then((value) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                            content: Text(
-                                                "User Request is accepted to join the event")));
-                                  });
-                                },
-                                child: Text(
-                                  "Accept",
-                                  style: TextStyle(color: Colors.green),
-                                )),
-                            TextButton(
-                                onPressed: () {
-                                  FirebaseFirestore.instance
-                                      .collection("joins")
-                                      .doc(document.id)
-                                      .update({"joinedRequest": "denied"}).then(
-                                          (value) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                            content: Text(
-                                                "User Request is denied to join the event")));
-                                  });
-                                },
-                                child: Text(
-                                  "Denied",
-                                  style: TextStyle(color: Colors.red),
-                                ))
-                          ],
-                        ),
+                  subtitle:
+                      data['joinid'] == FirebaseAuth.instance.currentUser!.uid
+                          ? Text("")
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                    onPressed: () async {
+                                      FirebaseFirestore.instance
+                                          .collection("joins")
+                                          .doc(document.id)
+                                          .update({
+                                        "joinedRequest": "accepted",
+                                        "number of joins": accept++
+                                      }).then((value) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "User Request is accepted to join the event")));
+                                      });
+                                    },
+                                    child: Text(
+                                      "Accept",
+                                      style: TextStyle(color: Colors.green),
+                                    )),
+                                TextButton(
+                                    onPressed: () {
+                                      FirebaseFirestore.instance
+                                          .collection("joins")
+                                          .doc(document.id)
+                                          .update({
+                                        "joinedRequest": "denied",
+                                        "number of joins": accept--
+                                      }).then((value) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "User Request is denied to join the event")));
+                                      });
+                                    },
+                                    child: Text(
+                                      "Denied",
+                                      style: TextStyle(color: Colors.red),
+                                    ))
+                              ],
+                            ),
                 ),
               ),
             );
