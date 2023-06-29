@@ -93,7 +93,7 @@ class _DeniedRequestState extends State<DeniedRequest> {
                                   .doc(document.id)
                                   .update({
                                 "joinedRequest": "accepted",
-                                "number of joins": data['number of joins']++
+                                "number of joins": data["number of joins"] - 1
                               }).then((value) {
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                     content: Text(

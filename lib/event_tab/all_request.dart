@@ -102,7 +102,8 @@ class _AllRequestState extends State<AllRequest> {
                                           .doc(document.id)
                                           .update({
                                         "joinedRequest": "accepted",
-                                        "number of joins": accept++
+                                        "number of joins":
+                                            data["number of joins"] + 1
                                       }).then((value) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
