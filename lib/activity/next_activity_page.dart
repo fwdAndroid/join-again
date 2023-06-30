@@ -27,6 +27,10 @@ class _NextActivityPageState extends State<NextActivityPage> {
   @override
   void initState() {
     super.initState();
+
+    startTimeController.text = "11: AM";
+    endTimeController.text = "1:PM";
+    createDateController.text = "1 Jan,2012";
   }
 
   @override
@@ -318,7 +322,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          content:  SingleChildScrollView(
+          content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text('Are you sure to continue ?'),
