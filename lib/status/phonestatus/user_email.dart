@@ -89,19 +89,21 @@ class _UserEmailState extends State<UserEmail> {
   void createProfile() async {
     if (nameController.text.isEmpty) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
+          .showSnackBar(SnackBar(content: Text("Email is Required")));
     } else {
       await FirebaseFirestore.instance
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
         "email": nameController.text,
-      }).then((value) => {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Phone Number Added"))),
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (builder) => SelectGender()))
-              });
+      });
+      setState(() {
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Email is Added")));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (builder) => SelectGender()));
     }
   }
 }
