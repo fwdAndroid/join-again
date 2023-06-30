@@ -336,31 +336,18 @@ class _NextActivityPageState extends State<NextActivityPage> {
                 style: TextStyle(color: Colors.black),
               ),
               onPressed: () {
-                if (createDateController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Date of event is required")));
-                  Navigator.pop(context);
-                } else if (startTimeController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Start time of event is required")));
-                  Navigator.pop(context);
-                } else if (endTimeController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Ending time of event is required")));
-                } else {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (builder) => MapScreenActivity(
-                                cate: widget.cate,
-                                title: widget.title,
-                                desc: widget.description,
-                                image: widget.image,
-                                starttime: startTimeController.text,
-                                endtime: endTimeController.text,
-                                day: createDateController.text,
-                              )));
-                }
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => MapScreenActivity(
+                              cate: widget.cate,
+                              title: widget.title,
+                              desc: widget.description,
+                              image: widget.image,
+                              starttime: startTimeController.text,
+                              endtime: endTimeController.text,
+                              day: createDateController.text,
+                            )));
               },
             ),
             TextButton(

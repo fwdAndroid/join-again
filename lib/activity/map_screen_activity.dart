@@ -40,12 +40,14 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
   GoogleMapController? mapController; //contrller for Google map
   CameraPosition? cameraPosition;
   bool _isLoading = false;
+  bool loading = false;
   List latlong = [];
   String location = 'Please move map to A specific location.';
   var uuid = Uuid().v4();
   @override
   void initState() {
     getLatLong();
+    _locationController.text = "Germany";
     super.initState();
   }
 
@@ -241,12 +243,84 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                                 style: TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.w400),
                               )),
-                          InkWell(
-                            onTap: createProfile,
-                            child: Container(
-                                margin: EdgeInsets.only(
-                                    left: 15, top: 10, right: 10, bottom: 10),
-                                child: Image.asset("assets/save.png")),
+
+                          // Note
+                          // There is a Problem in longitude and latitude it using default user location values not
+                          //the values we selected by the navigate the map cursoor
+                          Container(
+                            margin: EdgeInsets.only(
+                                left: 15, right: 15, top: 10, bottom: 10),
+                            child: Center(
+                                child: loading
+                                    ? Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            fixedSize: Size(343, 48),
+                                            backgroundColor: Color(0xff246A73)),
+                                        onPressed: () async {
+                                          setState(() {
+                                            loading = true;
+                                          });
+
+                                          Position position = await Geolocator
+                                              .getCurrentPosition(
+                                                  desiredAccuracy:
+                                                      LocationAccuracy.best);
+
+                                          String photoURL =
+                                              await StorageMethods()
+                                                  .uploadImageToStorage(
+                                                      'UserPics',
+                                                      widget.image!,
+                                                      true);
+
+                                          FirebaseFirestore.instance
+                                              .collection("activity")
+                                              .doc(uuid)
+                                              .set({
+                                            "title": widget.title,
+                                            "uuid": uuid,
+                                            "description": widget.desc,
+                                            "address": _locationController.text,
+                                            "category": widget.cate,
+                                            "photo": photoURL,
+                                            "latitude":
+                                                position.latitude, //Issue
+                                            "longitude":
+                                                position.longitude, // Issue
+                                            "date": widget.day,
+                                            "uid": FirebaseAuth
+                                                .instance.currentUser!.uid,
+                                            "startTime": widget.starttime,
+                                            "endTime": widget.endtime,
+                                            "activity": widget.cate,
+                                            "activitystatus": "ongoing",
+                                            "numberofjoiners": 0,
+                                          });
+
+                                          setState(() {
+                                            loading = false;
+                                          });
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  content: Text(
+                                                      "Activity Created Successfully")));
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (builder) =>
+                                                      MainScreen()));
+                                        },
+                                        child: Text(
+                                          "Save",
+                                          style: TextStyle(color: Colors.white),
+                                        ))),
                           )
                         ],
                       ),
@@ -255,80 +329,6 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                 ],
               ),
             ),
-    );
-  }
-
-  void createProfile() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content:  SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Are you sure to add an event?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text(
-                'Yes',
-                style: TextStyle(color: Colors.black),
-              ),
-              onPressed: () async {
-                if (_locationController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Location is required")));
-                  Navigator.pop(context);
-                } else {
-                  Position position = await Geolocator.getCurrentPosition(
-                      desiredAccuracy: LocationAccuracy.best);
-
-                  String photoURL = await StorageMethods()
-                      .uploadImageToStorage('UserPics', widget.image!, true);
-
-                  FirebaseFirestore.instance
-                      .collection("activity")
-                      .doc(uuid)
-                      .set({
-                    "title": widget.title,
-                    "uuid": uuid,
-                    "description": widget.desc,
-                    "address": _locationController.text,
-                    "category": widget.cate,
-                    "photo": photoURL,
-                    "latitude": position.latitude,
-                    "longitude": position.longitude,
-                    "date": widget.day,
-                    "uid": FirebaseAuth.instance.currentUser!.uid,
-                    "startTime": widget.starttime,
-                    "endTime": widget.endtime,
-                    "activity": widget.cate,
-                    "activitystatus": "ongoing",
-                    "numberofjoiners": 0,
-                  }).then((value) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("Activity Created Successfully")));
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) => MainScreen()));
-                  });
-                }
-              },
-            ),
-            TextButton(
-              child: const Text(
-                'No',
-                style: TextStyle(color: Colors.black),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 
