@@ -107,17 +107,22 @@ class _SelectGenderState extends State<SelectGender> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("All Fields are Required")));
     } else {
+      setState(() {
+        _isLoading = true;
+      });
       await FirebaseFirestore.instance
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
         "gender": art,
-      }).then((value) => {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text("Gender is Added"))),
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (builder) => MainScreen()))
-              });
+      });
+      setState(() {
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Gender is Added")));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (builder) => MainScreen()));
     }
   }
 }

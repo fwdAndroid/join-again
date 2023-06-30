@@ -112,19 +112,24 @@ class _UserDateofBirthState extends State<UserDateofBirth> {
   void createProfile() async {
     if (nameController.text.isEmpty) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
+          .showSnackBar(SnackBar(content: Text("Date of Birth are Required")));
     } else {
+      setState(() {
+        _isLoading = true;
+      });
       await FirebaseFirestore.instance
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
         "dob": nameController.text,
-      }).then((value) => {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Date of Birth is Added"))),
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (builder) => UserPhoneNumber()))
-              });
+      });
+      setState(() {
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Date of Birth is Added")));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (builder) => UserPhoneNumber()));
     }
   }
 }

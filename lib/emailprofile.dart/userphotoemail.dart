@@ -165,20 +165,23 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("All Fields are Required")));
     } else {
+      setState(() {
+        _isLoading = true;
+      });
       String photoURL = await StorageMethods()
           .uploadImageToStorage('ProfilePics', _image!, false);
       await FirebaseFirestore.instance
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({"name": nameController.text, "photo": photoURL}).then(
-              (value) => {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Name and Photo Added"))),
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (builder) => UserDateofBirth()))
-                  });
+          .update({"name": nameController.text, "photo": photoURL});
+      setState(() {
+        _isLoading = false;
+      });
+
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Name and Photo Added")));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (builder) => UserDateofBirth()));
     }
   }
 }
