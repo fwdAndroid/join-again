@@ -31,7 +31,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
 
     startTimeController.text = "11: AM";
     endTimeController.text = "1:PM";
-    createDateController.text = "20 july,2023";
+    createDateController.text = "20 July,2023";
   }
 
   @override

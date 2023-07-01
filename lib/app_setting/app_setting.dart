@@ -39,131 +39,124 @@ class _AppSettingState extends State<AppSetting> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (builder) => LoginScreen()));
-              },
-              child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection("users")
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .snapshots(),
-                  builder: (context, AsyncSnapshot snapshot) {
-                    if (!snapshot.hasData) {
-                      return new CircularProgressIndicator();
-                    }
-                    var document = snapshot.data;
-                    return Container(
-                      height: 300,
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            "assets/Group 1000001549.png",
-                            width: MediaQuery.of(context).size.width,
-                            height: 150,
-                            fit: BoxFit.cover,
-                          ),
-                          Container(
-                            margin:
-                                EdgeInsets.only(left: 20, right: 20, top: 20),
-                            child: Card(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left: 20, right: 20, top: 10),
-                                    child: Text(
-                                      "Link Accounts",
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .snapshots(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return new CircularProgressIndicator();
+                  }
+                  var document = snapshot.data;
+                  return Container(
+                    height: 300,
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          "assets/Group 1000001549.png",
+                          width: MediaQuery.of(context).size.width,
+                          height: 150,
+                          fit: BoxFit.cover,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                          child: Card(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      left: 20, right: 20, top: 10),
+                                  child: Text(
+                                    "Link Accounts",
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontFamily: "ProximaNova",
+                                        fontSize: 16,
+                                        color: Color(0xff736F7F),
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10, top: 5),
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffEDF3F4),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15))),
+                                  child: ListTile(
+                                    leading: Image.asset(
+                                        "assets/circle-flags_uk.png"),
+                                    title: Text(
+                                      "Linked",
                                       style: TextStyle(
                                           fontFamily: "ProximaNova",
                                           fontSize: 16,
-                                          color: Color(0xff736F7F),
+                                          color: Color(0xff246A73),
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    subtitle: Text(document['email']),
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10, top: 5),
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffEDF3F4),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15))),
+                                  child: ListTile(
+                                    leading: Image.asset(
+                                      "assets/face.png",
+                                      width: 22,
+                                      height: 22,
+                                    ),
+                                    title: Text(
+                                      "Tap to Connect Here",
+                                      style: TextStyle(
+                                          color: Color(
+                                            0xff160F29,
+                                          ),
+                                          fontSize: 16,
+                                          fontFamily: "ProximaNova",
                                           fontWeight: FontWeight.w400),
                                     ),
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left: 10, right: 10, top: 5),
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffEDF3F4),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15))),
-                                    child: ListTile(
-                                      leading: Image.asset(
-                                          "assets/circle-flags_uk.png"),
-                                      title: Text(
-                                        "Linked",
-                                        style: TextStyle(
-                                            fontFamily: "ProximaNova",
-                                            fontSize: 16,
-                                            color: Color(0xff246A73),
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                      subtitle: Text(document['email']),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10, top: 5),
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffEDF3F4),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15))),
+                                  child: ListTile(
+                                    leading: Icon(
+                                      Icons.phone,
+                                      color: Color(0xff246A73),
+                                    ),
+                                    title: Text(
+                                      "Tap to Connect Here",
+                                      style: TextStyle(
+                                          color: Color(
+                                            0xff160F29,
+                                          ),
+                                          fontSize: 16,
+                                          fontFamily: "ProximaNova",
+                                          fontWeight: FontWeight.w400),
                                     ),
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left: 10, right: 10, top: 5),
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffEDF3F4),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15))),
-                                    child: ListTile(
-                                      leading: Image.asset(
-                                        "assets/face.png",
-                                        width: 22,
-                                        height: 22,
-                                      ),
-                                      title: Text(
-                                        "Tap to Connect Here",
-                                        style: TextStyle(
-                                            color: Color(
-                                              0xff160F29,
-                                            ),
-                                            fontSize: 16,
-                                            fontFamily: "ProximaNova",
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left: 10, right: 10, top: 5),
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffEDF3F4),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15))),
-                                    child: ListTile(
-                                      leading: Icon(
-                                        Icons.phone,
-                                        color: Color(0xff246A73),
-                                      ),
-                                      title: Text(
-                                        "Tap to Connect Here",
-                                        style: TextStyle(
-                                            color: Color(
-                                              0xff160F29,
-                                            ),
-                                            fontSize: 16,
-                                            fontFamily: "ProximaNova",
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  }),
-            ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
             Container(
               margin: EdgeInsets.only(
                 left: 25,
