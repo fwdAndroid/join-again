@@ -27,7 +27,8 @@ class WelComePage extends StatefulWidget {
 class _WelComePageState extends State<WelComePage> {
   String googleApikey = "AIzaSyBffT8plN_Vdcd308KgmzIfGVQN6q-CkAo";
   GoogleMapController? mapController; //contrller for Google map
-  CameraPosition cameraPosition=CameraPosition(target: LatLng(51.1657, 10.4515));
+  CameraPosition cameraPosition =
+      CameraPosition(target: LatLng(51.1657, 10.4515));
   bool _isLoading = false;
   List latlong = [];
   String location = 'Please move map to A specific location.';
@@ -43,30 +44,33 @@ class _WelComePageState extends State<WelComePage> {
 
   init() async {
     await getUserCurrentLocation().then((value) async {
-    print("value.latitude:${value.latitude}");
-    markers.add(Marker(
-        markerId: MarkerId("2"),
-        position: LatLng(value.latitude, value.longitude)));
-    CameraPosition cameraPosition = CameraPosition(
-        target: LatLng(value.latitude, value.longitude), zoom: 14);
+      print("value.latitude:${value.latitude}");
+      markers.add(Marker(
+          markerId: MarkerId("2"),
+          position: LatLng(value.latitude, value.longitude)));
+      CameraPosition cameraPosition = CameraPosition(
+          target: LatLng(value.latitude, value.longitude), zoom: 14);
 //    final GoogleMapController controller = await _completer.future;
       await loadCustomMarkerIcon();
-    await fetchLocationData();
-    await getLatLong();
-    mapController!.animateCamera(CameraUpdate.newCameraPosition(cameraPosition)).then((value) {
-      print('animated');
+      await fetchLocationData();
+      await getLatLong();
+      mapController!
+          .animateCamera(CameraUpdate.newCameraPosition(cameraPosition))
+          .then((value) {
+        print('animated');
+      });
+      setState(() {});
     });
-    setState(() {});
-  });
     SendNotification().updateToken();
   }
+
   @override
   void dispose() {
     //  searchController.dispose();
     super.dispose();
   }
 
-   getLatLong() async {
+  getLatLong() async {
     setState(() {
       _isLoading = true;
     });
@@ -545,9 +549,9 @@ class _WelComePageState extends State<WelComePage> {
     setState(() {
       _isLoading = true;
     });
-    await Geolocator.requestPermission()
-        .then((value) async {
-      print('getUserCurrentLocation:$value:${await Geolocator.getCurrentPosition()}');
+    await Geolocator.requestPermission().then((value) async {
+      print(
+          'getUserCurrentLocation:$value:${await Geolocator.getCurrentPosition()}');
     }).onError((error, stackTrace) {
       print("error" + error.toString());
     });

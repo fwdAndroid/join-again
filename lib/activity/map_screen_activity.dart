@@ -47,7 +47,7 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
   @override
   void initState() {
     getLatLong();
-    _locationController.text = "Germany";
+    _locationController.text = "Select Activity Location From Map";
     super.initState();
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:join/activity/map_screen_activity.dart';
+import 'package:join/main/main_screen.dart';
 
 class NextActivityPage extends StatefulWidget {
   final title;
@@ -30,7 +31,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
 
     startTimeController.text = "11: AM";
     endTimeController.text = "1:PM";
-    createDateController.text = "1 Jan,2012";
+    createDateController.text = "20 july,2023";
   }
 
   @override
@@ -356,7 +357,8 @@ class _NextActivityPageState extends State<NextActivityPage> {
                 style: TextStyle(color: Colors.black),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (builder) => MainScreen()));
               },
             ),
           ],
