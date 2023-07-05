@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:join/app_setting/edit_profile.dart';
-import 'package:join/auth/login_screen.dart';
 import 'package:join/event_tab/event_tab.dart';
+
+import '../screens/auth/first_screen.dart';
 
 class AppSetting extends StatefulWidget {
   const AppSetting({super.key});
@@ -28,11 +29,7 @@ class _AppSettingState extends State<AppSetting> {
           "Setting",
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
-          style: TextStyle(
-              fontFamily: "ProximaNova",
-              fontSize: 20,
-              color: Color(0xff160F29),
-              fontWeight: FontWeight.w600),
+          style: TextStyle(fontFamily: "ProximaNova", fontSize: 20, color: Color(0xff160F29), fontWeight: FontWeight.w600),
         ),
       ),
       body: SingleChildScrollView(
@@ -40,10 +37,7 @@ class _AppSettingState extends State<AppSetting> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection("users")
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .snapshots(),
+                stream: FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (!snapshot.hasData) {
                     return new CircularProgressIndicator();
@@ -66,47 +60,31 @@ class _AppSettingState extends State<AppSetting> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(
-                                      left: 20, right: 20, top: 10),
+                                  margin: EdgeInsets.only(left: 20, right: 20, top: 10),
                                   child: Text(
                                     "Link Accounts",
                                     overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                        fontFamily: "ProximaNova",
-                                        fontSize: 16,
-                                        color: Color(0xff736F7F),
-                                        fontWeight: FontWeight.w400),
+                                        fontFamily: "ProximaNova", fontSize: 16, color: Color(0xff736F7F), fontWeight: FontWeight.w400),
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(
-                                      left: 10, right: 10, top: 5),
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffEDF3F4),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(15))),
+                                  margin: EdgeInsets.only(left: 10, right: 10, top: 5),
+                                  decoration: BoxDecoration(color: Color(0xffEDF3F4), borderRadius: BorderRadius.all(Radius.circular(15))),
                                   child: ListTile(
-                                    leading: Image.asset(
-                                        "assets/circle-flags_uk.png"),
+                                    leading: Image.asset("assets/circle-flags_uk.png"),
                                     title: Text(
                                       "Linked",
                                       style: TextStyle(
-                                          fontFamily: "ProximaNova",
-                                          fontSize: 16,
-                                          color: Color(0xff246A73),
-                                          fontWeight: FontWeight.w400),
+                                          fontFamily: "ProximaNova", fontSize: 16, color: Color(0xff246A73), fontWeight: FontWeight.w400),
                                     ),
                                     subtitle: Text(document['email']),
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(
-                                      left: 10, right: 10, top: 5),
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffEDF3F4),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(15))),
+                                  margin: EdgeInsets.only(left: 10, right: 10, top: 5),
+                                  decoration: BoxDecoration(color: Color(0xffEDF3F4), borderRadius: BorderRadius.all(Radius.circular(15))),
                                   child: ListTile(
                                     leading: Image.asset(
                                       "assets/face.png",
@@ -126,12 +104,8 @@ class _AppSettingState extends State<AppSetting> {
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(
-                                      left: 10, right: 10, top: 5),
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffEDF3F4),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(15))),
+                                  margin: EdgeInsets.only(left: 10, right: 10, top: 5),
+                                  decoration: BoxDecoration(color: Color(0xffEDF3F4), borderRadius: BorderRadius.all(Radius.circular(15))),
                                   child: ListTile(
                                     leading: Icon(
                                       Icons.phone,
@@ -177,8 +151,7 @@ class _AppSettingState extends State<AppSetting> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (builder) => EditProfile()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => EditProfile()));
               },
               child: Container(
                 margin: EdgeInsets.only(
@@ -195,12 +168,7 @@ class _AppSettingState extends State<AppSetting> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0.0, 0.0),
-                          color: Colors.grey,
-                          blurRadius: 0.1)
-                    ]),
+                    boxShadow: [BoxShadow(offset: Offset(0.0, 0.0), color: Colors.grey, blurRadius: 0.1)]),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -246,12 +214,7 @@ class _AppSettingState extends State<AppSetting> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                        offset: Offset(0.0, 0.0),
-                        color: Colors.grey,
-                        blurRadius: 0.1)
-                  ]),
+                  boxShadow: [BoxShadow(offset: Offset(0.0, 0.0), color: Colors.grey, blurRadius: 0.1)]),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -283,8 +246,7 @@ class _AppSettingState extends State<AppSetting> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (builder) => EventRequestTab()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => EventRequestTab()));
               },
               child: Container(
                 margin: EdgeInsets.only(
@@ -301,12 +263,7 @@ class _AppSettingState extends State<AppSetting> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0.0, 0.0),
-                          color: Colors.grey,
-                          blurRadius: 0.1)
-                    ]),
+                    boxShadow: [BoxShadow(offset: Offset(0.0, 0.0), color: Colors.grey, blurRadius: 0.1)]),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -352,12 +309,7 @@ class _AppSettingState extends State<AppSetting> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                        offset: Offset(0.0, 0.0),
-                        color: Colors.grey,
-                        blurRadius: 0.1)
-                  ]),
+                  boxShadow: [BoxShadow(offset: Offset(0.0, 0.0), color: Colors.grey, blurRadius: 0.1)]),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -402,12 +354,7 @@ class _AppSettingState extends State<AppSetting> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                        offset: Offset(0.0, 0.0),
-                        color: Colors.grey,
-                        blurRadius: 0.1)
-                  ]),
+                  boxShadow: [BoxShadow(offset: Offset(0.0, 0.0), color: Colors.grey, blurRadius: 0.1)]),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -452,12 +399,7 @@ class _AppSettingState extends State<AppSetting> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                        offset: Offset(0.0, 0.0),
-                        color: Colors.grey,
-                        blurRadius: 0.1)
-                  ]),
+                  boxShadow: [BoxShadow(offset: Offset(0.0, 0.0), color: Colors.grey, blurRadius: 0.1)]),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -504,12 +446,7 @@ class _AppSettingState extends State<AppSetting> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0.0, 0.0),
-                          color: Colors.grey,
-                          blurRadius: 0.1)
-                    ]),
+                    boxShadow: [BoxShadow(offset: Offset(0.0, 0.0), color: Colors.grey, blurRadius: 0.1)]),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -571,8 +508,7 @@ class _AppSettingState extends State<AppSetting> {
             height: 144,
             width: 270,
             child: AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(14.0))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0))),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
@@ -621,15 +557,9 @@ class _AppSettingState extends State<AppSetting> {
                                 .doc(FirebaseAuth.instance.currentUser!.uid)
                                 .delete()
                                 .then((value) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                          "Account Deleted Successfully")));
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Account Deleted Successfully")));
                               FirebaseAuth.instance.currentUser!.delete();
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (builder) => LoginScreen()));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => LoginScreen()));
                             });
                           },
                           child: Text("Yes"),
@@ -653,8 +583,7 @@ class _AppSettingState extends State<AppSetting> {
             height: 144,
             width: 270,
             child: AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(14.0))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0))),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
@@ -699,13 +628,8 @@ class _AppSettingState extends State<AppSetting> {
                         TextButton(
                           onPressed: () async {
                             await FirebaseAuth.instance.signOut().then((value) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text("Logout Successfully")));
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (builder) => LoginScreen()));
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logout Successfully")));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => LoginScreen()));
                             });
                           },
                           child: Text("Yes"),
