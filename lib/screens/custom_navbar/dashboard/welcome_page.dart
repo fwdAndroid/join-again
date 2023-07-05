@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +6,18 @@ import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:join/activities_panel/create.dart';
-import 'package:join/activities_panel/intectualactivities.dart';
-import 'package:join/activities_panel/physicalactivities.dart';
-import 'package:join/activities_panel/relax.dart';
-import 'package:join/activities_panel/sip_together.dart';
-import 'package:join/activity/geo_service.dart';
 import 'package:join/chat_views/views/send_notification.dart';
-import 'package:join/filters/filters.dart';
-import 'package:join/notification/notiy.dart';
 
+import '../../screens/activities/activities_panel/create.dart';
+import '../../screens/activities/activities_panel/intectualactivities.dart';
+import '../../screens/activities/activities_panel/physical_activities.dart';
+import '../../screens/activities/activities_panel/relax.dart';
+import '../../screens/activities/activities_panel/sip_together.dart';
+import '../../screens/activities/activity/geo_service.dart';
+import '../../screens/filters/filters.dart';
+import '../../screens/notification/notiy.dart';
+
+//todo please fix padding problem
 class WelComePage extends StatefulWidget {
   const WelComePage({super.key});
 
@@ -27,8 +28,7 @@ class WelComePage extends StatefulWidget {
 class _WelComePageState extends State<WelComePage> {
   String googleApikey = "AIzaSyBffT8plN_Vdcd308KgmzIfGVQN6q-CkAo";
   GoogleMapController? mapController; //contrller for Google map
-  CameraPosition cameraPosition =
-      CameraPosition(target: LatLng(51.1657, 10.4515));
+  CameraPosition cameraPosition = CameraPosition(target: LatLng(51.1657, 10.4515));
   bool _isLoading = false;
   List latlong = [];
   String location = 'Please move map to A specific location.';
@@ -45,18 +45,13 @@ class _WelComePageState extends State<WelComePage> {
   init() async {
     await getUserCurrentLocation().then((value) async {
       print("value.latitude:${value.latitude}");
-      markers.add(Marker(
-          markerId: MarkerId("2"),
-          position: LatLng(value.latitude, value.longitude)));
-      CameraPosition cameraPosition = CameraPosition(
-          target: LatLng(value.latitude, value.longitude), zoom: 14);
+      markers.add(Marker(markerId: MarkerId("2"), position: LatLng(value.latitude, value.longitude)));
+      CameraPosition cameraPosition = CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 14);
 //    final GoogleMapController controller = await _completer.future;
       await loadCustomMarkerIcon();
       await fetchLocationData();
       await getLatLong();
-      mapController!
-          .animateCamera(CameraUpdate.newCameraPosition(cameraPosition))
-          .then((value) {
+      mapController!.animateCamera(CameraUpdate.newCameraPosition(cameraPosition)).then((value) {
         print('animated');
       });
       setState(() {});
@@ -94,8 +89,7 @@ class _WelComePageState extends State<WelComePage> {
   List<Marker> markers = [];
 
   Future<void> fetchLocationData() async {
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('activity').get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('activity').get();
     setState(() {
       markers = querySnapshot.docs.map((doc) {
         double latitude = doc['latitude'];
@@ -111,26 +105,17 @@ class _WelComePageState extends State<WelComePage> {
 
   @override
   Widget build(BuildContext context) {
-    LatLng startLocation = _isLoading
-        ? const LatLng(51.1657, 10.4515)
-        : LatLng(latlong[0], latlong[1]);
+    LatLng startLocation = _isLoading ? const LatLng(51.1657, 10.4515) : LatLng(latlong[0], latlong[1]);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width, 182),
         child: AppBar(
           backgroundColor: Color.fromARGB(19, 246, 246, 244),
           elevation: 6,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20))),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
           title: Text(
             "Welcome to JOIN",
-            style: TextStyle(
-                fontFamily: "ProximaNova",
-                fontWeight: FontWeight.w700,
-                fontSize: 17,
-                color: Color(0xff160F29)),
+            style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w700, fontSize: 17, color: Color(0xff160F29)),
             overflow: TextOverflow.ellipsis,
           ),
           leading: Padding(
@@ -142,8 +127,7 @@ class _WelComePageState extends State<WelComePage> {
           actions: [
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (builder) => Filters()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => Filters()));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -152,8 +136,7 @@ class _WelComePageState extends State<WelComePage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (builder) => Noti()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => Noti()));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -168,25 +151,18 @@ class _WelComePageState extends State<WelComePage> {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (builder) => PhysicalActivities()));
+                    Navigator.push(context, MaterialPageRoute(builder: (builder) => PhysicalActivities()));
                   },
                   child: Column(
                     children: [
-                      Image.asset("assets/pc1.png",
-                          width: 50, height: 50, fit: BoxFit.cover),
+                      Image.asset("assets/pc1.png", width: 50, height: 50, fit: BoxFit.cover),
                       SizedBox(
                         height: 10,
                       ),
                       Text(
                         "Physical\nActivities",
                         style: TextStyle(
-                            color: Color(0xff160F29).withOpacity(.8),
-                            fontSize: 10,
-                            fontFamily: "ProximaNova",
-                            fontWeight: FontWeight.w600),
+                            color: Color(0xff160F29).withOpacity(.8), fontSize: 10, fontFamily: "ProximaNova", fontWeight: FontWeight.w600),
                         textAlign: TextAlign.center,
                       )
                     ],
@@ -194,24 +170,17 @@ class _WelComePageState extends State<WelComePage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (builder) => IntelacutualActivities()));
+                    Navigator.push(context, MaterialPageRoute(builder: (builder) => IntelacutualActivities()));
                   },
                   child: Column(
                     children: [
-                      Image.asset("assets/pc3.png",
-                          width: 50, height: 50, fit: BoxFit.cover),
+                      Image.asset("assets/pc3.png", width: 50, height: 50, fit: BoxFit.cover),
                       SizedBox(
                         height: 10,
                       ),
                       Text(
                         style: TextStyle(
-                            color: Color(0xff160F29).withOpacity(.8),
-                            fontSize: 10,
-                            fontFamily: "ProximaNova",
-                            fontWeight: FontWeight.w600),
+                            color: Color(0xff160F29).withOpacity(.8), fontSize: 10, fontFamily: "ProximaNova", fontWeight: FontWeight.w600),
                         "Interllectual\nActivities",
                         textAlign: TextAlign.center,
                       )
@@ -220,22 +189,17 @@ class _WelComePageState extends State<WelComePage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) => SipTogether()));
+                    Navigator.push(context, MaterialPageRoute(builder: (builder) => SipTogether()));
                   },
                   child: Column(
                     children: [
-                      Image.asset("assets/pc5.png",
-                          width: 50, height: 50, fit: BoxFit.cover),
+                      Image.asset("assets/pc5.png", width: 50, height: 50, fit: BoxFit.cover),
                       SizedBox(
                         height: 10,
                       ),
                       Text(
                         style: TextStyle(
-                            color: Color(0xff160F29).withOpacity(.8),
-                            fontSize: 10,
-                            fontFamily: "ProximaNova",
-                            fontWeight: FontWeight.w600),
+                            color: Color(0xff160F29).withOpacity(.8), fontSize: 10, fontFamily: "ProximaNova", fontWeight: FontWeight.w600),
                         "Sip\nTogether",
                         textAlign: TextAlign.center,
                       )
@@ -244,13 +208,11 @@ class _WelComePageState extends State<WelComePage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) => Create()));
+                    Navigator.push(context, MaterialPageRoute(builder: (builder) => Create()));
                   },
                   child: Column(
                     children: [
-                      Image.asset("assets/pc2.png",
-                          width: 50, height: 50, fit: BoxFit.cover),
+                      Image.asset("assets/pc2.png", width: 50, height: 50, fit: BoxFit.cover),
                       SizedBox(
                         height: 10,
                       ),
@@ -269,13 +231,11 @@ class _WelComePageState extends State<WelComePage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) => Relaxation()));
+                    Navigator.push(context, MaterialPageRoute(builder: (builder) => Relaxation()));
                   },
                   child: Column(
                     children: [
-                      Image.asset("assets/pc4.png",
-                          width: 50, height: 50, fit: BoxFit.cover),
+                      Image.asset("assets/pc4.png", width: 50, height: 50, fit: BoxFit.cover),
                       SizedBox(
                         height: 10,
                       ),
@@ -322,19 +282,16 @@ class _WelComePageState extends State<WelComePage> {
                 cameraPosition = cameraPositiona; //when map is dragging
               },
               onCameraIdle: () async {
-                List<Placemark> addresses = await placemarkFromCoordinates(
-                    cameraPosition!.target.latitude,
-                    cameraPosition!.target.longitude);
+                List<Placemark> addresses =
+                    await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
 
                 var first = addresses.first;
                 print("${first.name} : ${first..administrativeArea}");
 
-                List<Placemark> placemarks = await placemarkFromCoordinates(
-                    cameraPosition!.target.latitude,
-                    cameraPosition!.target.longitude);
+                List<Placemark> placemarks =
+                    await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
                 Placemark place = placemarks[0];
-                location =
-                    '${place.street},${place.subLocality},${place.locality},${place.thoroughfare},';
+                location = '${place.street},${place.subLocality},${place.locality},${place.thoroughfare},';
 
                 setState(() {
                   //get place name from lat and lang
@@ -385,8 +342,7 @@ class _WelComePageState extends State<WelComePage> {
               insetPadding: EdgeInsets.all(5),
               contentPadding: EdgeInsets.all(5),
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
@@ -405,9 +361,7 @@ class _WelComePageState extends State<WelComePage> {
                             ),
                             width: 22,
                             height: 22,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xffFF1919).withOpacity(.20)),
+                            decoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xffFF1919).withOpacity(.20)),
                           ),
                         ),
                       ],
@@ -418,17 +372,11 @@ class _WelComePageState extends State<WelComePage> {
                       ),
                       title: Text(
                         "Paddy O'Furniture",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                       subtitle: Text(
                         "Lorem Ipsum",
-                        style: TextStyle(
-                            color: Color(0xff736F7F),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Color(0xff736F7F), fontSize: 14, fontWeight: FontWeight.w400),
                       ),
                     ),
                     SizedBox(
@@ -441,16 +389,13 @@ class _WelComePageState extends State<WelComePage> {
                           child: Center(
                             child: Text(
                               "House Party",
-                              style: TextStyle(
-                                  color: Color(0xff246A73), fontSize: 8),
+                              style: TextStyle(color: Color(0xff246A73), fontSize: 8),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           width: 50,
                           height: 26,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: Color(0xff368F8B).withOpacity(.10)),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: Color(0xff368F8B).withOpacity(.10)),
                         ),
                         SizedBox(
                           width: 10,
@@ -459,16 +404,13 @@ class _WelComePageState extends State<WelComePage> {
                           child: Center(
                             child: Text(
                               "House Party",
-                              style: TextStyle(
-                                  color: Color(0xff246A73), fontSize: 8),
+                              style: TextStyle(color: Color(0xff246A73), fontSize: 8),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           width: 50,
                           height: 26,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: Color(0xff368F8B).withOpacity(.10)),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: Color(0xff368F8B).withOpacity(.10)),
                         ),
                         SizedBox(
                           width: 10,
@@ -477,16 +419,13 @@ class _WelComePageState extends State<WelComePage> {
                           child: Center(
                             child: Text(
                               "House Party",
-                              style: TextStyle(
-                                  color: Color(0xff246A73), fontSize: 8),
+                              style: TextStyle(color: Color(0xff246A73), fontSize: 8),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           width: 50,
                           height: 26,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: Color(0xff368F8B).withOpacity(.10)),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: Color(0xff368F8B).withOpacity(.10)),
                         ),
                       ],
                     ),
@@ -512,9 +451,7 @@ class _WelComePageState extends State<WelComePage> {
                             },
                             child: Text(
                               "Invite",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                             )),
                         SizedBox(
                           width: 10,
@@ -529,9 +466,7 @@ class _WelComePageState extends State<WelComePage> {
                             onPressed: () {},
                             child: Text(
                               "Chat",
-                              style: TextStyle(
-                                  color: Color(0xff246A73),
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Color(0xff246A73), fontWeight: FontWeight.bold),
                             )),
                       ],
                     )
@@ -550,8 +485,7 @@ class _WelComePageState extends State<WelComePage> {
       _isLoading = true;
     });
     await Geolocator.requestPermission().then((value) async {
-      print(
-          'getUserCurrentLocation:$value:${await Geolocator.getCurrentPosition()}');
+      print('getUserCurrentLocation:$value:${await Geolocator.getCurrentPosition()}');
     }).onError((error, stackTrace) {
       print("error" + error.toString());
     });

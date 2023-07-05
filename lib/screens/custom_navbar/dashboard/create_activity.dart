@@ -2,8 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:join/activity/next_activity_page.dart';
-import 'package:join/widgets/utils.dart';
+import 'package:join/widgets/image_uploading_widget.dart';
+
+import '../../screens/activities/activity/next_activity_page.dart';
 
 class CreateActivity extends StatefulWidget {
   @override
@@ -48,11 +49,7 @@ class _CreateActivityState extends State<CreateActivity> {
           "Create Activity",
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
-          style: TextStyle(
-              fontFamily: "ProximaNova",
-              fontWeight: FontWeight.w700,
-              fontSize: 17,
-              color: Color(0xff160F29)),
+          style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w700, fontSize: 17, color: Color(0xff160F29)),
         ),
       ),
       body: SingleChildScrollView(
@@ -74,10 +71,7 @@ class _CreateActivityState extends State<CreateActivity> {
                 ),
                 Text(
                   "Add Title Name ",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                      color: Color(0xff736F7F)),
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
                 ),
               ]),
             ),
@@ -86,19 +80,11 @@ class _CreateActivityState extends State<CreateActivity> {
               child: TextFormField(
                 decoration: InputDecoration(
                   filled: true,
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.white)),
-                  disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.white)),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.white)),
+                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                  disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Color(0xff368F8B))),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Color(0xff368F8B))),
                   hintText: "Wes Yabinlatelee",
                   helperStyle: TextStyle(
                     fontSize: 16,
@@ -125,10 +111,7 @@ class _CreateActivityState extends State<CreateActivity> {
                   ),
                   Text(
                     "Choose Category",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                        color: Color(0xff736F7F)),
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
                   ),
                 ],
               ),
@@ -170,8 +153,7 @@ class _CreateActivityState extends State<CreateActivity> {
                     art = value!;
                   });
                 },
-                items: dropdownItemList
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: dropdownItemList.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -193,10 +175,7 @@ class _CreateActivityState extends State<CreateActivity> {
                   ),
                   Text(
                     "Description",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                        color: Color(0xff736F7F)),
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
                   ),
                 ],
               ),
@@ -222,15 +201,9 @@ class _CreateActivityState extends State<CreateActivity> {
               ),
               child: TextFormField(
                 decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.white)),
-                  disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.white)),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.white)),
+                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                  disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
                   fillColor: Colors.white,
                   filled: true,
                   contentPadding: EdgeInsets.only(left: 15, top: 40),
@@ -248,8 +221,7 @@ class _CreateActivityState extends State<CreateActivity> {
               child: Container(
                 margin: EdgeInsets.only(top: 20, right: 15, left: 15),
                 child: _image != null
-                    ? CircleAvatar(
-                        radius: 59, backgroundImage: MemoryImage(_image!))
+                    ? CircleAvatar(radius: 59, backgroundImage: MemoryImage(_image!))
                     : Image.asset(
                         "assets/Group 6860.png",
                         width: 343,
@@ -305,10 +277,7 @@ class _CreateActivityState extends State<CreateActivity> {
                             "Activate this Button to be able to accept or reject new users to your activity",
                             maxLines: null,
                             textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Color(0xff736F7F)),
+                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xff736F7F)),
                           ),
                           title: const Text(
                             'Private / On Request',
@@ -345,10 +314,7 @@ class _CreateActivityState extends State<CreateActivity> {
                             "Get notified when someone is joining your activity.",
                             maxLines: null,
                             textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Color(0xff736F7F)),
+                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xff736F7F)),
                           ),
                           title: const Text(
                             'Notifications',
@@ -385,10 +351,7 @@ class _CreateActivityState extends State<CreateActivity> {
                             "Toggle if this is activity shall be repeated.",
                             maxLines: null,
                             textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Color(0xff736F7F)),
+                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xff736F7F)),
                           ),
                           title: const Text(
                             'Repeat',
@@ -436,7 +399,7 @@ class _CreateActivityState extends State<CreateActivity> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          content:  SingleChildScrollView(
+          content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text('Do you want to continue ?'),
@@ -451,12 +414,10 @@ class _CreateActivityState extends State<CreateActivity> {
               ),
               onPressed: () {
                 if (createTitleController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Title is Required")));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Title is Required")));
                   Navigator.pop(context);
                 } else if (descriptiontextController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Description is Required")));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Description is Required")));
                   Navigator.pop(context);
                 } else {
                   Navigator.push(

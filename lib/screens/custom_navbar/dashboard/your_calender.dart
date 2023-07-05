@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:join/calenderpages/all.dart';
-import 'package:join/calenderpages/ongoing.dart';
-import 'package:join/calenderpages/past.dart';
+import 'package:join/screens/calender/all.dart';
+import 'package:join/screens/calender/ongoing.dart';
+import 'package:join/screens/calender/past.dart';
 
 /// Flutter code sample for [TabBar].
 
@@ -19,11 +19,7 @@ class YourCalender extends StatelessWidget {
           automaticallyImplyLeading: false,
           title: Text(
             "Your Calender",
-            style: TextStyle(
-                fontFamily: "ProximaNova",
-                fontSize: 20,
-                color: Color(0xff160F29),
-                fontWeight: FontWeight.w600),
+            style: TextStyle(fontFamily: "ProximaNova", fontSize: 20, color: Color(0xff160F29), fontWeight: FontWeight.w600),
           ),
           bottom: TabBar(
             labelColor: Colors.black,
