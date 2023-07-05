@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:join/chat_views/views/globals.dart';
-import 'package:join/database/database_methods.dart';
 import 'package:join/main/main_screen.dart';
+import 'package:join/services/auth_service.dart';
 import 'package:join/status/phonestatus/user_phone_photo_email.dart';
 
 class CheckPhoneStatus extends StatefulWidget {
@@ -31,21 +31,14 @@ class _CheckPhoneStatusState extends State<CheckPhoneStatus> {
   }
 
   void checkresult() async {
-    final doc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
+    final doc = await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).get();
     final bool doesDocExist = doc.exists;
-userID=FirebaseAuth.instance.currentUser!.uid;
+    userID = FirebaseAuth.instance.currentUser!.uid;
     if (doesDocExist) {
       print("wrong which");
-      Navigator.push(
-          context, MaterialPageRoute(builder: (builder) => MainScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (builder) => MainScreen()));
     } else {
-      DatabaseMethods().phone().then((value) => {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (builder) => UserPhonePhotoEmail()))
-          });
+      AuthServices().phone().then((value) => {Navigator.push(context, MaterialPageRoute(builder: (builder) => UserPhonePhotoEmail()))});
     }
   }
 }

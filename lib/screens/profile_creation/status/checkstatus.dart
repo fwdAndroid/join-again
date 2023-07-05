@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:join/database/database_methods.dart';
-import 'package:join/emailprofile.dart/userphotoemail.dart';
 import 'package:join/main/main_screen.dart';
+import 'package:join/screens/profile_creation/userphotoemail.dart';
+import 'package:join/services/auth_service.dart';
 
 class CheckStatus extends StatefulWidget {
   const CheckStatus({super.key});
@@ -30,21 +30,14 @@ class _CheckStatusState extends State<CheckStatus> {
   }
 
   void checkresult() async {
-    final doc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
+    final doc = await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).get();
     final bool doesDocExist = doc.exists;
 
     if (doesDocExist) {
       print("wrong which");
-      Navigator.push(
-          context, MaterialPageRoute(builder: (builder) => MainScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (builder) => MainScreen()));
     } else {
-      DatabaseMethods().emailGoogle().then((value) => {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (builder) => UserPhotoEmail()))
-          });
+      AuthServices().emailGoogle().then((value) => {Navigator.push(context, MaterialPageRoute(builder: (builder) => UserPhotoEmail()))});
     }
   }
 }
