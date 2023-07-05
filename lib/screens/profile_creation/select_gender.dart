@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:join/main/main_screen.dart';
+
+import '../custom_navbar/custom_navbar.dart';
 
 class SelectGender extends StatefulWidget {
   const SelectGender({super.key});
@@ -71,8 +72,7 @@ class _SelectGenderState extends State<SelectGender> {
                   art = value!;
                 });
               },
-              items: dropdownItemList
-                  .map<DropdownMenuItem<String>>((String value) {
+              items: dropdownItemList.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -104,25 +104,19 @@ class _SelectGenderState extends State<SelectGender> {
 
   void createProfile() async {
     if (art.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All Fields are Required")));
     } else {
       setState(() {
         _isLoading = true;
       });
-      await FirebaseFirestore.instance
-          .collection("users")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({
+      await FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({
         "gender": art,
       });
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Gender is Added")));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (builder) => MainScreen()));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Gender is Added")));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => MainScreen()));
     }
   }
 }

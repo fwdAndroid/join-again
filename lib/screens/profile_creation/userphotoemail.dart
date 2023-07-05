@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:join/database/storage_methods.dart';
-import 'package:join/emailprofile.dart/user_dob.dart';
-import 'package:join/widgets/utils.dart';
+import 'package:join/screens/profile_creation/user_dob.dart';
+import 'package:join/services/storage_services.dart';
+import 'package:join/widgets/image_uploading_widget.dart';
 
 class UserPhotoEmail extends StatefulWidget {
   const UserPhotoEmail({super.key});
@@ -56,8 +56,7 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _image != null
-                          ? CircleAvatar(
-                              radius: 59, backgroundImage: MemoryImage(_image!))
+                          ? CircleAvatar(radius: 59, backgroundImage: MemoryImage(_image!))
                           : Image.asset(
                               "assets/phone.png",
                               width: 51,
@@ -107,18 +106,10 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
                 filled: true,
                 contentPadding: EdgeInsets.only(top: 10),
                 fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.grey)),
-                disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.grey)),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.grey)),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.grey)),
+                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
+                disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
+                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
                 hintText: "Enter Your Name",
                 helperStyle: TextStyle(
                   fontSize: 14,
@@ -162,14 +153,12 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
 
   void createProfile() async {
     if (nameController.text.isEmpty || _image!.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All Fields are Required")));
     } else {
       setState(() {
         _isLoading = true;
       });
-      String photoURL = await StorageMethods()
-          .uploadImageToStorage('ProfilePics', _image!, false);
+      String photoURL = await StorageServices().uploadImageToStorage('ProfilePics', _image!, false);
       await FirebaseFirestore.instance
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -178,10 +167,8 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
         _isLoading = false;
       });
 
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Name and Photo Added")));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (builder) => UserDateofBirth()));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Name and Photo Added")));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => UserDateofBirth()));
     }
   }
 }

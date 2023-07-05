@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:join/screens/profile_creation/status/phonestatus/user_phone_dob.dart';
 import 'package:join/services/storage_services.dart';
-import 'package:join/status/phonestatus/user_phone_dob.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
 
 class UserPhonePhotoEmail extends StatefulWidget {

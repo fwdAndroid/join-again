@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:join/emailprofile.dart/select_gender.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:join/screens/profile_creation/select_gender.dart';
 
 class UserPhoneNumber extends StatefulWidget {
   const UserPhoneNumber({super.key});
@@ -43,18 +43,10 @@ class _UserPhoneNumberState extends State<UserPhoneNumber> {
                   filled: true,
                   contentPadding: EdgeInsets.only(top: 10),
                   fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.grey)),
-                  disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.grey)),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.grey)),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.grey)),
+                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
+                  disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
                 ),
                 initialCountryCode: 'TH',
                 onChanged: (phone) {
@@ -85,26 +77,20 @@ class _UserPhoneNumberState extends State<UserPhoneNumber> {
 
   void createProfile() async {
     if (nameController.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All Fields are Required")));
     } else {
       setState(() {
         _isLoading = true;
       });
-      await FirebaseFirestore.instance
-          .collection("users")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({
+      await FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({
         "phone": nameController.text,
       });
       setState(() {
         _isLoading = false;
       });
 
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Phone Number Added")));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (builder) => SelectGender()));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Phone Number Added")));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => SelectGender()));
     }
   }
 }

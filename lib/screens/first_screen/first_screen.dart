@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:join/database/database_methods.dart';
 import 'package:join/screens/auth/phone/continue_phone.dart';
-import 'package:join/status/checkstatus.dart';
+import 'package:join/services/auth_service.dart';
 
 import '../../widgets/buttons.dart';
+import '../profile_creation/status/checkstatus.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 40),
                     AuthButton(
                       onPressed: () async {
-                        await DatabaseMethods()
+                        await AuthServices()
                             .signInWithGoogle()
                             .then((value) => {Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => CheckStatus()))});
                       },

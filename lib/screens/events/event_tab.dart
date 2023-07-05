@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:join/event_tab/accepted_request.dart';
-import 'package:join/event_tab/all_request.dart';
-import 'package:join/event_tab/denied_request.dart';
+
+import 'accepted_request.dart';
+import 'all_request.dart';
+import 'denied_request.dart';
+
 
 class EventRequestTab extends StatefulWidget {
   const EventRequestTab({super.key});

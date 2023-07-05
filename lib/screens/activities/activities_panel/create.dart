@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:join/activity/geo_service.dart';
+
+import '../activity/geo_service.dart';
 
 class Create extends StatefulWidget {
   const Create({super.key});
@@ -65,10 +65,8 @@ class _CreateState extends State<Create> {
   List<Marker> markers = [];
 
   Future<void> fetchLocationData() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('activity')
-        .where("activity", isEqualTo: "Creative Activities")
-        .get();
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('activity').where("activity", isEqualTo: "Creative Activities").get();
     setState(() {
       markers = querySnapshot.docs.map((doc) {
         double latitude = doc['latitude'];
@@ -84,9 +82,7 @@ class _CreateState extends State<Create> {
 
   @override
   Widget build(BuildContext context) {
-    LatLng startLocation = _isLoading
-        ? const LatLng(51.1657, 10.4515)
-        : LatLng(latlong[0], latlong[1]);
+    LatLng startLocation = _isLoading ? const LatLng(51.1657, 10.4515) : LatLng(latlong[0], latlong[1]);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 225, 243, 246),
       appBar: AppBar(
@@ -94,11 +90,7 @@ class _CreateState extends State<Create> {
         backgroundColor: Color.fromARGB(19, 246, 246, 244),
         title: Text(
           "Creative Activities",
-          style: TextStyle(
-              fontFamily: "ProximaNova",
-              fontWeight: FontWeight.w700,
-              fontSize: 17,
-              color: Color(0xff160F29)),
+          style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w700, fontSize: 17, color: Color(0xff160F29)),
           overflow: TextOverflow.ellipsis,
         ),
       ),
@@ -122,19 +114,14 @@ class _CreateState extends State<Create> {
           cameraPosition = cameraPositiona; //when map is dragging
         },
         onCameraIdle: () async {
-          List<Placemark> addresses = await placemarkFromCoordinates(
-              cameraPosition!.target.latitude,
-              cameraPosition!.target.longitude);
+          List<Placemark> addresses = await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
 
           var first = addresses.first;
           print("${first.name} : ${first..administrativeArea}");
 
-          List<Placemark> placemarks = await placemarkFromCoordinates(
-              cameraPosition!.target.latitude,
-              cameraPosition!.target.longitude);
+          List<Placemark> placemarks = await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
           Placemark place = placemarks[0];
-          location =
-              '${place.street},${place.subLocality},${place.locality},${place.thoroughfare},';
+          location = '${place.street},${place.subLocality},${place.locality},${place.thoroughfare},';
 
           setState(() {
             //get place name from lat and lang

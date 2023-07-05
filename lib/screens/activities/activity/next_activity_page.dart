@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:join/activity/map_screen_activity.dart';
-import 'package:join/main/main_screen.dart';
+
+import '../../custom_navbar/custom_navbar.dart';
+import 'map_screen_activity.dart';
 
 class NextActivityPage extends StatefulWidget {
   final title;
@@ -9,12 +10,7 @@ class NextActivityPage extends StatefulWidget {
   final image;
   final cate;
 
-  const NextActivityPage(
-      {super.key,
-      required this.description,
-      required this.image,
-      required this.cate,
-      required this.title});
+  const NextActivityPage({super.key, required this.description, required this.image, required this.cate, required this.title});
 
   @override
   State<NextActivityPage> createState() => _NextActivityPageState();
@@ -53,11 +49,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
           "Create Activity",
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
-          style: TextStyle(
-              fontFamily: "ProximaNova",
-              fontWeight: FontWeight.w700,
-              fontSize: 17,
-              color: Color(0xff160F29)),
+          style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w700, fontSize: 17, color: Color(0xff160F29)),
         ),
       ),
       body: Column(
@@ -75,11 +67,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
               ),
               Text(
                 "Select Date",
-                style: TextStyle(
-                    fontFamily: "ProximaNova",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    color: Color(0xff736F7F)),
+                style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
               ),
             ]),
           ),
@@ -100,18 +88,10 @@ class _NextActivityPageState extends State<NextActivityPage> {
                 ),
                 filled: true,
                 fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.white)),
-                disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.white)),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.white)),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.white)),
+                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
                 hintText: "12/04/2023",
                 helperStyle: TextStyle(
                   fontSize: 14,
@@ -143,10 +123,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
                       ),
                       Text(
                         "Start Time",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                            color: Color(0xff736F7F)),
+                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
                       ),
                     ]),
                   ),
@@ -174,18 +151,13 @@ class _NextActivityPageState extends State<NextActivityPage> {
                         hintText: "10 : 00 AM",
                         filled: true,
                         fillColor: Colors.white,
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Colors.white)),
-                        disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Colors.white)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Colors.white)),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Colors.white)),
+                        focusedBorder:
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                        disabledBorder:
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                        enabledBorder:
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
                       ),
                     ),
                   ),
@@ -210,11 +182,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
                       ),
                       Text(
                         "End Time",
-                        style: TextStyle(
-                            fontFamily: "ProximaNova",
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                            color: Color(0xff736F7F)),
+                        style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
                       ),
                     ]),
                   ),
@@ -242,18 +210,13 @@ class _NextActivityPageState extends State<NextActivityPage> {
                         hintText: "10 : 00 AM",
                         filled: true,
                         fillColor: Colors.white,
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Colors.white)),
-                        disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Colors.white)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Colors.white)),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Colors.white)),
+                        focusedBorder:
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                        disabledBorder:
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                        enabledBorder:
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
                       ),
                     ),
                   ),
@@ -311,9 +274,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
       _selectedDate = newSelectedDate;
       createDateController
         ..text = DateFormat.yMMMd().format(_selectedDate!)
-        ..selection = TextSelection.fromPosition(TextPosition(
-            offset: createDateController.text.length,
-            affinity: TextAffinity.upstream));
+        ..selection = TextSelection.fromPosition(TextPosition(offset: createDateController.text.length, affinity: TextAffinity.upstream));
     }
   }
 
@@ -357,8 +318,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
                 style: TextStyle(color: Colors.black),
               ),
               onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (builder) => MainScreen()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => MainScreen()));
               },
             ),
           ],

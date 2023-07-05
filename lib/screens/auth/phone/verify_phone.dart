@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:join/status/phonestatus/checkphonestatus.dart';
 import 'package:pinput/pinput.dart';
+
+import '../../profile_creation/status/phonestatus/checkphonestatus.dart';
 
 class VerifyPhone extends StatefulWidget {
   final String phone;
@@ -30,10 +31,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
-      textStyle: TextStyle(
-          fontSize: 20,
-          color: Color.fromRGBO(30, 60, 87, 1),
-          fontWeight: FontWeight.w600),
+      textStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(30, 60, 87, 1), fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
         border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
         borderRadius: BorderRadius.circular(20),
@@ -61,8 +59,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
             ),
             Container(
               child: InkWell(
-                child:
-                    Text("verification: ${widget.codeDigits}-${widget.phone}"),
+                child: Text("verification: ${widget.codeDigits}-${widget.phone}"),
               ),
             ),
             SizedBox(
@@ -79,14 +76,10 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                 onCompleted: (pin) async {
                   try {
                     await FirebaseAuth.instance
-                        .signInWithCredential(PhoneAuthProvider.credential(
-                            verificationId: verificationCode!, smsCode: pin))
+                        .signInWithCredential(PhoneAuthProvider.credential(verificationId: verificationCode!, smsCode: pin))
                         .then((value) {
                       if (value.user != null) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (ctx) => CheckPhoneStatus()));
+                        Navigator.push(context, MaterialPageRoute(builder: (ctx) => CheckPhoneStatus()));
                       }
                     });
                   } catch (e) {
@@ -129,9 +122,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "${widget.codeDigits + widget.phone}",
         verificationCompleted: (PhoneAuthCredential credential) async {
-          await FirebaseAuth.instance
-              .signInWithCredential(credential)
-              .then((value) {
+          await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
             if (value.user != null) {
               // Customdialog.showDialogBox(context);
               Navigator.of(context).push(

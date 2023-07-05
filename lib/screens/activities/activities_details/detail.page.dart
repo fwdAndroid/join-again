@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:join/main/main_screen.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../custom_navbar/custom_navbar.dart';
 
 class DetailPage extends StatefulWidget {
   final endTime;
@@ -46,11 +47,7 @@ class _DetailPageState extends State<DetailPage> {
         backgroundColor: Color.fromARGB(19, 246, 246, 244),
         title: Text(
           widget.title,
-          style: TextStyle(
-              fontFamily: "ProximaNova",
-              fontWeight: FontWeight.w700,
-              fontSize: 17,
-              color: Color(0xff160F29)),
+          style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w700, fontSize: 17, color: Color(0xff160F29)),
           overflow: TextOverflow.ellipsis,
         ),
       ),
@@ -81,12 +78,7 @@ class _DetailPageState extends State<DetailPage> {
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15),
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(0, 0),
-                            blurRadius: 1,
-                            color: Colors.grey)
-                      ]),
+                      boxShadow: [BoxShadow(offset: Offset(0, 0), blurRadius: 1, color: Colors.grey)]),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -94,34 +86,22 @@ class _DetailPageState extends State<DetailPage> {
                       children: [
                         Text(
                           "Title",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 19,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(color: Colors.black, fontSize: 19, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           widget.title,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
+                          style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Text(
                           "Status",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 19,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(color: Colors.black, fontSize: 19, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           widget.statis,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
+                          style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
                           height: 10,
@@ -138,20 +118,14 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                             Text(
                               widget.date,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
+                              style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             Text(
                               widget.startTime,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
+                              style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                             SizedBox(
                               width: 10,
@@ -162,10 +136,7 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                             Text(
                               widget.endTime,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
+                              style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                           ],
                         )
@@ -178,10 +149,8 @@ class _DetailPageState extends State<DetailPage> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                    BoxShadow(
-                        offset: Offset(0, 0), blurRadius: 1, color: Colors.grey)
-                  ]),
+                  decoration:
+                      BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(offset: Offset(0, 0), blurRadius: 1, color: Colors.grey)]),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -189,17 +158,11 @@ class _DetailPageState extends State<DetailPage> {
                       children: [
                         Text(
                           "Description",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 19,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(color: Colors.black, fontSize: 19, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           widget.desc,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
+                          style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -210,10 +173,8 @@ class _DetailPageState extends State<DetailPage> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                    BoxShadow(
-                        offset: Offset(0, 0), blurRadius: 1, color: Colors.grey)
-                  ]),
+                  decoration:
+                      BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(offset: Offset(0, 0), blurRadius: 1, color: Colors.grey)]),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -221,17 +182,11 @@ class _DetailPageState extends State<DetailPage> {
                       children: [
                         Text(
                           "Location",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 19,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(color: Colors.black, fontSize: 19, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           widget.address,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
+                          style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
                         ),
                         Image.asset("assets/ima.png")
                       ],
@@ -243,15 +198,10 @@ class _DetailPageState extends State<DetailPage> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                    BoxShadow(
-                        offset: Offset(0, 0), blurRadius: 1, color: Colors.grey)
-                  ]),
+                  decoration:
+                      BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(offset: Offset(0, 0), blurRadius: 1, color: Colors.grey)]),
                   child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection("users")
-                          .doc(FirebaseAuth.instance.currentUser!.uid)
-                          .snapshots(),
+                      stream: FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
                       builder: (context, AsyncSnapshot snapshot) {
                         if (!snapshot.hasData) {
                           return new CircularProgressIndicator();
@@ -264,10 +214,7 @@ class _DetailPageState extends State<DetailPage> {
                             children: [
                               Text(
                                 "Event",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16),
+                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 16),
                               ),
                               SizedBox(
                                 height: 7,
@@ -286,18 +233,14 @@ class _DetailPageState extends State<DetailPage> {
                                   ),
                                   Text(
                                     widget.title,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15),
+                                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
                                   ),
                                 ],
                               ),
                               SizedBox(
                                 height: 7,
                               ),
-                              widget.createid ==
-                                      FirebaseAuth.instance.currentUser!.uid
+                              widget.createid == FirebaseAuth.instance.currentUser!.uid
                                   ? Container()
                                   : isLoading
                                       ? Center(
@@ -308,22 +251,16 @@ class _DetailPageState extends State<DetailPage> {
                                           child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
+                                                    borderRadius: BorderRadius.circular(8.0),
                                                   ),
-                                                  backgroundColor:
-                                                      Color(0xff368F8B),
+                                                  backgroundColor: Color(0xff368F8B),
                                                   fixedSize: Size(321, 50)),
                                               onPressed: () async {
                                                 setState(() {
                                                   isLoading = true;
                                                 });
                                                 var uuid = Uuid().v4();
-                                                await FirebaseFirestore.instance
-                                                    .collection("joins")
-                                                    .doc(uuid)
-                                                    .set({
+                                                await FirebaseFirestore.instance.collection("joins").doc(uuid).set({
                                                   "previousuuid": widget.uuid,
                                                   "title": widget.title,
                                                   "status": "ongoing",
@@ -336,26 +273,17 @@ class _DetailPageState extends State<DetailPage> {
                                                   "joinname": document['name'],
                                                   "creatorid": widget.createid,
                                                   "currentuuid": uuid,
-                                                  "joinid": FirebaseAuth
-                                                      .instance
-                                                      .currentUser!
-                                                      .uid,
+                                                  "joinid": FirebaseAuth.instance.currentUser!.uid,
                                                   "joinedRequest": "pending"
                                                 }).then(
                                                   (value) => {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
+                                                    ScaffoldMessenger.of(context).showSnackBar(
                                                       SnackBar(
-                                                        content: Text(
-                                                            "Event Join Request Send"),
+                                                        content: Text("Event Join Request Send"),
                                                       ),
                                                     ),
                                                     Navigator.pushReplacement(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (builder) =>
-                                                                MainScreen()))
+                                                        context, MaterialPageRoute(builder: (builder) => MainScreen()))
                                                   },
                                                 );
                                                 setState(() {
@@ -364,8 +292,7 @@ class _DetailPageState extends State<DetailPage> {
                                               },
                                               child: Text(
                                                 "Join",
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                                style: TextStyle(color: Colors.white),
                                               )),
                                         )
                             ],

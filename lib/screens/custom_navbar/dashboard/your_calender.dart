@@ -3,8 +3,6 @@ import 'package:join/screens/calender/all.dart';
 import 'package:join/screens/calender/ongoing.dart';
 import 'package:join/screens/calender/past.dart';
 
-/// Flutter code sample for [TabBar].
-
 class YourCalender extends StatelessWidget {
   const YourCalender({super.key});
 
@@ -17,11 +15,11 @@ class YourCalender extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
-          title: Text(
+          title: const Text(
             "Your Calender",
             style: TextStyle(fontFamily: "ProximaNova", fontSize: 20, color: Color(0xff160F29), fontWeight: FontWeight.w600),
           ),
-          bottom: TabBar(
+          bottom: const TabBar(
             labelColor: Colors.black,
             tabs: <Widget>[
               Tab(

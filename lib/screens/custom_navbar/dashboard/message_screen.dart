@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:join/chat_views/views/ChatListScreen.dart';
-import 'package:join/chat_views/views/NewChatScreen.dart';
-import 'package:join/messages_screen/event_chat.dart';
 
-/// Flutter code sample for [TabBar].
+import '../../chat/ChatListScreen.dart';
+import '../../chat/NewChatScreen.dart';
+import '../../chat/event_chat.dart';
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key});
@@ -24,36 +23,33 @@ class _MessageScreenState extends State<MessageScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (builder) => NewChatScreen()));
-                  },
-                  child: Icon(
-                    Icons.search,
-                    color: Theme.of(context).primaryColor,
-                  )),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (builder) => NewChatScreen()));
+                },
+                child: Icon(
+                  Icons.search,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
             )
           ],
           centerTitle: true,
           automaticallyImplyLeading: false,
-          title: Text(
+          title: const Text(
             "Messages",
             style: TextStyle(fontFamily: "ProximaNova", fontSize: 20, color: Color(0xff160F29), fontWeight: FontWeight.w600),
           ),
-          bottom: TabBar(
+          bottom: const TabBar(
             labelColor: Colors.black,
             tabs: <Widget>[
-              Tab(
-                text: "Events",
-              ),
-              Tab(
-                text: "People",
-              ),
+              Tab(text: "Events"),
+              Tab(text: "People"),
             ],
           ),
         ),
         body: TabBarView(
           children: <Widget>[
-            EventsChat(),
+            const EventsChat(),
             ChatListScreen(),
           ],
         ),

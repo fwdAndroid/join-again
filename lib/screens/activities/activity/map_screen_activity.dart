@@ -8,9 +8,10 @@ import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:uuid/uuid.dart';
-import 'package:join/activity/geo_service.dart';
-import 'package:join/database/storage_methods.dart';
-import 'package:join/main/main_screen.dart';
+
+import '../../../services/storage_services.dart';
+import '../../custom_navbar/custom_navbar.dart';
+import 'geo_service.dart';
 
 class MapScreenActivity extends StatefulWidget {
   final starttime;
@@ -59,9 +60,7 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
 
   @override
   Widget build(BuildContext context) {
-    LatLng startLocation = _isLoading
-        ? const LatLng(25.276987, 55.296249)
-        : LatLng(latlong[0], latlong[1]);
+    LatLng startLocation = _isLoading ? const LatLng(25.276987, 55.296249) : LatLng(latlong[0], latlong[1]);
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 225, 243, 246),
@@ -71,11 +70,7 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
         elevation: 6,
         title: Text(
           "Set Location",
-          style: TextStyle(
-              fontFamily: "ProximaNova",
-              fontWeight: FontWeight.w700,
-              fontSize: 17,
-              color: Color(0xff160F29)),
+          style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w700, fontSize: 17, color: Color(0xff160F29)),
           overflow: TextOverflow.ellipsis,
         ),
       ),
@@ -107,20 +102,15 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                     },
                     onCameraIdle: () async {
                       List<Placemark> addresses =
-                          await placemarkFromCoordinates(
-                              cameraPosition!.target.latitude,
-                              cameraPosition!.target.longitude);
+                          await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
 
                       var first = addresses.first;
                       print("${first.name} : ${first..administrativeArea}");
 
                       List<Placemark> placemarks =
-                          await placemarkFromCoordinates(
-                              cameraPosition!.target.latitude,
-                              cameraPosition!.target.longitude);
+                          await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
                       Placemark place = placemarks[0];
-                      location =
-                          '${place.street},${place.subLocality},${place.locality},${place.thoroughfare},';
+                      location = '${place.street},${place.subLocality},${place.locality},${place.thoroughfare},';
 
                       setState(() {
                         //get place name from lat and lang
@@ -143,16 +133,13 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                       margin: EdgeInsets.only(bottom: 60, left: 20, right: 20),
                       height: 174,
                       width: 343,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.0, 0.1), //(x,y)
-                              blurRadius: 0.5,
-                            ),
-                          ]),
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0.0, 0.1), //(x,y)
+                          blurRadius: 0.5,
+                        ),
+                      ]),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -161,10 +148,7 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                             child: Text(
                               "Location",
                               textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Color(0xff736F7F),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
+                              style: TextStyle(color: Color(0xff736F7F), fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                           ),
                           Container(
@@ -173,8 +157,7 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                                   border: Border.all(
                                     color: Color(0xffE5E5EA),
                                   )),
-                              margin:
-                                  EdgeInsets.only(left: 15, top: 10, right: 10),
+                              margin: EdgeInsets.only(left: 15, top: 10, right: 10),
                               child: TextField(
                                 onTap: () async {
                                   var place = await PlacesAutocomplete.show(
@@ -198,29 +181,23 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                                     });
                                     final plist = GoogleMapsPlaces(
                                       apiKey: googleApikey,
-                                      apiHeaders:
-                                          await GoogleApiHeaders().getHeaders(),
+                                      apiHeaders: await GoogleApiHeaders().getHeaders(),
                                       //from google_api_headers package
                                     );
                                     String placeid = place.placeId ?? "0";
-                                    final detail = await plist
-                                        .getDetailsByPlaceId(placeid);
+                                    final detail = await plist.getDetailsByPlaceId(placeid);
                                     final geometry = detail.result.geometry!;
                                     final lat = geometry.location.lat;
                                     final lang = geometry.location.lng;
                                     var newlatlang = LatLng(lat, lang);
-                                    mapController?.animateCamera(
-                                        CameraUpdate.newCameraPosition(
-                                            CameraPosition(
-                                                target: newlatlang, zoom: 17)));
+                                    mapController
+                                        ?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: newlatlang, zoom: 17)));
                                   }
                                 },
                                 controller: _locationController,
                                 decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(6),
-                                        borderSide: BorderSide(
-                                            color: Color(0xffE5E5EA))),
+                                        borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Color(0xffE5E5EA))),
                                     disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
                                       borderSide: BorderSide(
@@ -238,18 +215,15 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                                       color: Colors.black,
                                     ),
                                     border: InputBorder.none,
-                                    hintText:
-                                        "52 Rue Des Fleurs 33500 Libourne"),
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w400),
+                                    hintText: "52 Rue Des Fleurs 33500 Libourne"),
+                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                               )),
 
                           // Note
                           // There is a Problem in longitude and latitude it using default user location values not
                           //the values we selected by the navigate the map cursoor
                           Container(
-                            margin: EdgeInsets.only(
-                                left: 15, right: 15, top: 10, bottom: 10),
+                            margin: EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
                             child: Center(
                                 child: loading
                                     ? Center(
@@ -258,8 +232,7 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                                     : ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                             shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                              borderRadius: BorderRadius.circular(8.0),
                                             ),
                                             fixedSize: Size(343, 48),
                                             backgroundColor: Color(0xff246A73)),
@@ -268,35 +241,21 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                                             loading = true;
                                           });
 
-                                          Position position = await Geolocator
-                                              .getCurrentPosition(
-                                                  desiredAccuracy:
-                                                      LocationAccuracy.best);
+                                          Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
 
-                                          String photoURL =
-                                              await StorageMethods()
-                                                  .uploadImageToStorage(
-                                                      'UserPics',
-                                                      widget.image!,
-                                                      true);
+                                          String photoURL = await StorageServices().uploadImageToStorage('UserPics', widget.image!, true);
 
-                                          FirebaseFirestore.instance
-                                              .collection("activity")
-                                              .doc(uuid)
-                                              .set({
+                                          FirebaseFirestore.instance.collection("activity").doc(uuid).set({
                                             "title": widget.title,
                                             "uuid": uuid,
                                             "description": widget.desc,
                                             "address": _locationController.text,
                                             "category": widget.cate,
                                             "photo": photoURL,
-                                            "latitude":
-                                                position.latitude, //Issue
-                                            "longitude":
-                                                position.longitude, // Issue
+                                            "latitude": position.latitude, //Issue
+                                            "longitude": position.longitude, // Issue
                                             "date": widget.day,
-                                            "uid": FirebaseAuth
-                                                .instance.currentUser!.uid,
+                                            "uid": FirebaseAuth.instance.currentUser!.uid,
                                             "startTime": widget.starttime,
                                             "endTime": widget.endtime,
                                             "activity": widget.cate,
@@ -308,14 +267,8 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                                             loading = false;
                                           });
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      "Activity Created Successfully")));
-                                          Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (builder) =>
-                                                      MainScreen()));
+                                              .showSnackBar(SnackBar(content: Text("Activity Created Successfully")));
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => MainScreen()));
                                         },
                                         child: Text(
                                           "Save",

@@ -6,27 +6,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Firebaseapp {
+class NotificationServices {
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-  Firebaseapp() {}
 
-  init(){
+  init() {
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     _requestPermissions();
 
     android_iossettings();
     ForegroundMessage();
   }
+
   getToken() async {
     _requestFCMPermissions(_fcm);
     var token = await FirebaseMessaging.instance.getToken();
     FirebaseMessaging.instance.onTokenRefresh.listen((newToken) {
       // Save newToken
       token = newToken;
-      if(kDebugMode) print('Token: $newToken');
+      if (kDebugMode) print('Token: $newToken');
     });
-    if(kDebugMode)print('Token: $token');
+    if (kDebugMode) print('Token: $token');
     return token;
   }
 
@@ -60,10 +60,8 @@ class Firebaseapp {
   }
 
   android_iossettings() async {
-    final AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
-    final DarwinInitializationSettings initializationSettingsIOS =
-    DarwinInitializationSettings(
+    final AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+    final DarwinInitializationSettings initializationSettingsIOS = DarwinInitializationSettings(
         requestAlertPermission: false,
         requestBadgePermission: false,
         requestSoundPermission: false,
@@ -72,14 +70,12 @@ class Firebaseapp {
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: onSelectNotification);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings, onDidReceiveNotificationResponse: onSelectNotification);
   }
-
 
   ForegroundMessage() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      if (kDebugMode)  print("noti arrived:" + message.data.toString());
+      if (kDebugMode) print("noti arrived:" + message.data.toString());
       showNotification(message);
     }).onError((e) {});
   }
@@ -103,51 +99,48 @@ class Firebaseapp {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      if(kDebugMode) print('User granted permission');
+      if (kDebugMode) print('User granted permission');
     } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-      if(kDebugMode)print('User granted provisional permission');
+      if (kDebugMode) print('User granted provisional permission');
     } else {
-      if(kDebugMode) print('User declined or has not accepted permission');
+      if (kDebugMode) print('User declined or has not accepted permission');
     }
 
-    flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-        IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
+    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
   }
 
   onSelectNotification(NotificationResponse notificationResponse) {
-    String payload=notificationResponse.payload.toString();
+    String payload = notificationResponse.payload.toString();
     if (kDebugMode) print("selectNotification " + payload);
-    }
-  didReceiveNotification(int? id, String? title, String? body, String? payload,) async {
-    }
-
-  showNotification(RemoteMessage message) async {
-    if (kDebugMode)  print("noti arrived:1" + message.data.toString());
-
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-    AndroidNotificationDetails('Join', 'join',
-        channelDescription: 'join',
-        importance: Importance.max,
-        priority: Priority.high,
-        color: Colors.green,
-        ticker: 'ticker');
-    const DarwinNotificationDetails iOSPlatformChannelSpecifics =
-    DarwinNotificationDetails(presentSound: true, presentAlert: true);
-    const NotificationDetails platformChannelSpecifics = NotificationDetails(
-        iOS: iOSPlatformChannelSpecifics,
-        android: androidPlatformChannelSpecifics);
-      if (kDebugMode)  print("noti arrived:2" + message.data.toString());
-      Random random =  Random();
-      int notiID = random.nextInt(9999 - 1000) + 1000;
-      flutterLocalNotificationsPlugin.show(notiID,
-          message.data['title'],
-          message.data['body'],platformChannelSpecifics,);
   }
 
+  didReceiveNotification(
+    int? id,
+    String? title,
+    String? body,
+    String? payload,
+  ) async {}
+
+  showNotification(RemoteMessage message) async {
+    if (kDebugMode) print("noti arrived:1" + message.data.toString());
+
+    const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails('Join', 'join',
+        channelDescription: 'join', importance: Importance.max, priority: Priority.high, color: Colors.green, ticker: 'ticker');
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics = DarwinNotificationDetails(presentSound: true, presentAlert: true);
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(iOS: iOSPlatformChannelSpecifics, android: androidPlatformChannelSpecifics);
+    if (kDebugMode) print("noti arrived:2" + message.data.toString());
+    Random random = Random();
+    int notiID = random.nextInt(9999 - 1000) + 1000;
+    flutterLocalNotificationsPlugin.show(
+      notiID,
+      message.data['title'],
+      message.data['body'],
+      platformChannelSpecifics,
+    );
+  }
 }

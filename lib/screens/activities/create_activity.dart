@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
 
-import '../../screens/activities/activity/next_activity_page.dart';
+import 'activity/next_activity_page.dart';
 
 class CreateActivity extends StatefulWidget {
   @override

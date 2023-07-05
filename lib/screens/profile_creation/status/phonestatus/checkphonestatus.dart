@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:join/chat_views/views/globals.dart';
-import 'package:join/main/main_screen.dart';
+import 'package:join/screens/profile_creation/status/phonestatus/user_phone_photo_email.dart';
 import 'package:join/services/auth_service.dart';
-import 'package:join/status/phonestatus/user_phone_photo_email.dart';
+
+import '../../../../utils/globals.dart';
+import '../../../custom_navbar/custom_navbar.dart';
 
 class CheckPhoneStatus extends StatefulWidget {
   const CheckPhoneStatus({super.key});

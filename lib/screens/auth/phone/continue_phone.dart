@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:join/auth/phone/verify_phone.dart';
-import 'package:phone_form_field/phone_form_field.dart';
+import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:join/screens/auth/phone/verify_phone.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 
 class ContinuePhone extends StatefulWidget {
   const ContinuePhone({Key? key}) : super(key: key);
@@ -38,10 +38,7 @@ class _ContinuePhoneState extends State<ContinuePhone> {
               ),
               Text(
                 "OTP Verification",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25),
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
               ),
               SizedBox(
                 height: 6,
@@ -49,19 +46,14 @@ class _ContinuePhoneState extends State<ContinuePhone> {
               Text(
                 "We will send you a code for verification dont share \n anyone your code",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15),
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
               ),
               SizedBox(
                 height: 20,
               ),
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blueAccent),
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white70),
+                    border: Border.all(color: Colors.blueAccent), borderRadius: BorderRadius.circular(20), color: Colors.white70),
                 margin: EdgeInsets.only(left: 20, right: 20, top: 10),
                 child: Row(
                   children: [
@@ -103,12 +95,8 @@ class _ContinuePhoneState extends State<ContinuePhone> {
                 child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (builder) => VerifyPhone(
-                                    phone: _controller.text,
-                                    codeDigits: dialCodeDigits)));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (builder) => VerifyPhone(phone: _controller.text, codeDigits: dialCodeDigits)));
                       }
                     },
                     child: Text(

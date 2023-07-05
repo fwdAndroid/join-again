@@ -4,11 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:join/main/main_screen.dart';
 import 'package:join/screens/settings/app_setting.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
 
-import '../../services/storage_services.dart';
+import '../../../services/storage_services.dart';
+import '../custom_navbar.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});

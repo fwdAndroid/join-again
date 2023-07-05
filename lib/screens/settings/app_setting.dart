@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:join/app_setting/edit_profile.dart';
-import 'package:join/event_tab/event_tab.dart';
+import 'package:join/screens/settings/edit_profile.dart';
 
-import '../screens/auth/first_screen.dart';
+import '../first_screen/first_screen.dart';
+import '../events/event_tab.dart';
 
 class AppSetting extends StatefulWidget {
   const AppSetting({super.key});
