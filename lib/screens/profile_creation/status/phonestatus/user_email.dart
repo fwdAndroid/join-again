@@ -24,51 +24,58 @@ class _UserEmailState extends State<UserEmail> {
             height: 150,
             width: 200,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Container(
-            margin: EdgeInsets.only(left: 25, right: 25, top: 20),
+            margin: const EdgeInsets.only(left: 25, right: 25, top: 20),
             height: 46,
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.email,
                   color: Colors.grey,
                 ),
                 filled: true,
-                contentPadding: EdgeInsets.only(top: 10),
+                contentPadding: const EdgeInsets.only(top: 10),
                 fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
-                disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
-                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.grey)),
+                disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.grey)),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.grey)),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.grey)),
                 hintText: "Enter Your Email",
-                helperStyle: TextStyle(
+                helperStyle: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w200,
                   color: Colors.grey,
                 ),
               ),
               focusNode: FocusNode(),
-              autofocus: true,
               controller: nameController,
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 25, right: 25, top: 25),
+            margin: const EdgeInsets.only(left: 25, right: 25, top: 25),
             child: _isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        fixedSize: Size(343, 48),
-                        backgroundColor: Color(0xff246A73)),
+                        fixedSize: const Size(343, 48),
+                        backgroundColor: const Color(0xff246A73)),
                     onPressed: createProfile,
-                    child: Text(
+                    child: const Text(
                       "Next",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     )),
@@ -80,16 +87,22 @@ class _UserEmailState extends State<UserEmail> {
 
   void createProfile() async {
     if (nameController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Email is Required")));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Email is Required")));
     } else {
-      await FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
         "email": nameController.text,
       });
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Email is Added")));
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => SelectGender()));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Email is Added")));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (builder) => SelectGender()));
     }
   }
 }

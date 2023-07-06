@@ -31,11 +31,11 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
             height: 150,
             width: 200,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Container(
-            margin: EdgeInsets.only(
+            margin: const EdgeInsets.only(
               left: 20,
               right: 20,
             ),
@@ -49,26 +49,27 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: Color(0xffD2D2D2),
+                      color: const Color(0xffD2D2D2),
                     ),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _image != null
-                          ? CircleAvatar(radius: 59, backgroundImage: MemoryImage(_image!))
+                          ? CircleAvatar(
+                              radius: 59, backgroundImage: MemoryImage(_image!))
                           : Image.asset(
                               "assets/phone.png",
                               width: 51,
                               height: 39,
                             ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                             text: 'Upload Profile Photo',
                             style: TextStyle(
                               fontFamily: 'ProximaNova',
@@ -95,46 +96,53 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 25, right: 25, top: 20),
+            margin: const EdgeInsets.only(left: 25, right: 25, top: 20),
             height: 46,
             child: TextFormField(
               decoration: InputDecoration(
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.person_2,
                   color: Colors.grey,
                 ),
                 filled: true,
-                contentPadding: EdgeInsets.only(top: 10),
+                contentPadding: const EdgeInsets.only(top: 10),
                 fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
-                disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
-                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.grey)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.grey)),
+                disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.grey)),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.grey)),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.grey)),
                 hintText: "Enter Your Name",
-                helperStyle: TextStyle(
+                helperStyle: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w200,
                   color: Colors.grey,
                 ),
               ),
               focusNode: FocusNode(),
-              autofocus: true,
               controller: nameController,
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 25, right: 25, top: 25),
+            margin: const EdgeInsets.only(left: 25, right: 25, top: 25),
             child: _isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        fixedSize: Size(343, 48),
-                        backgroundColor: Color(0xff246A73)),
+                        fixedSize: const Size(343, 48),
+                        backgroundColor: const Color(0xff246A73)),
                     onPressed: createProfile,
-                    child: Text(
+                    child: const Text(
                       "Next",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     )),
@@ -153,12 +161,14 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
 
   void createProfile() async {
     if (nameController.text.isEmpty || _image!.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All Fields are Required")));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
     } else {
       setState(() {
         _isLoading = true;
       });
-      String photoURL = await StorageServices().uploadImageToStorage('ProfilePics', _image!, false);
+      String photoURL = await StorageServices()
+          .uploadImageToStorage('ProfilePics', _image!, false);
       await FirebaseFirestore.instance
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -167,8 +177,10 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
         _isLoading = false;
       });
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Name and Photo Added")));
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => UserDateofBirth()));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Name and Photo Added")));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (builder) => UserDateofBirth()));
     }
   }
 }

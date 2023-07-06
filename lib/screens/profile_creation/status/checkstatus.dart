@@ -23,7 +23,7 @@ class _CheckStatusState extends State<CheckStatus> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text("Loading Please Wait"),
       ),
@@ -31,14 +31,21 @@ class _CheckStatusState extends State<CheckStatus> {
   }
 
   void checkresult() async {
-    final doc = await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).get();
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
     final bool doesDocExist = doc.exists;
 
     if (doesDocExist) {
       print("wrong which");
-      Navigator.push(context, MaterialPageRoute(builder: (builder) => MainScreen()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => MainScreen()));
     } else {
-      AuthServices().emailGoogle().then((value) => {Navigator.push(context, MaterialPageRoute(builder: (builder) => UserPhotoEmail()))});
+      AuthServices().emailGoogle().then((value) => {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (builder) => UserPhotoEmail()))
+          });
     }
   }
 }

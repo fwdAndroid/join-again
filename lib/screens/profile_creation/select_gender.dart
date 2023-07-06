@@ -31,29 +31,29 @@ class _SelectGenderState extends State<SelectGender> {
             height: 150,
             width: 200,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Container(
-            margin: EdgeInsets.only(left: 25, right: 25, top: 20),
+            margin: const EdgeInsets.only(left: 25, right: 25, top: 20),
             height: 80,
             child: DropdownButtonFormField<String>(
               focusColor: Colors.black,
               decoration: InputDecoration(
-                  hintStyle: TextStyle(color: Colors.black),
+                  hintStyle: const TextStyle(color: Colors.black),
                   fillColor: Colors.black,
-                  labelStyle: TextStyle(color: Colors.black),
+                  labelStyle: const TextStyle(color: Colors.black),
                   disabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: const BorderSide(color: Colors.black),
                   )),
               borderRadius: BorderRadius.circular(6),
               value: art,
@@ -72,7 +72,8 @@ class _SelectGenderState extends State<SelectGender> {
                   art = value!;
                 });
               },
-              items: dropdownItemList.map<DropdownMenuItem<String>>((String value) {
+              items: dropdownItemList
+                  .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -81,18 +82,18 @@ class _SelectGenderState extends State<SelectGender> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 25, right: 25, top: 25),
+            margin: const EdgeInsets.only(left: 25, right: 25, top: 25),
             child: _isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        fixedSize: Size(343, 48),
-                        backgroundColor: Color(0xff246A73)),
+                        fixedSize: const Size(343, 48),
+                        backgroundColor: const Color(0xff246A73)),
                     onPressed: createProfile,
-                    child: Text(
+                    child: const Text(
                       "Finish",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     )),
@@ -104,19 +105,25 @@ class _SelectGenderState extends State<SelectGender> {
 
   void createProfile() async {
     if (art.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All Fields are Required")));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
     } else {
       setState(() {
         _isLoading = true;
       });
-      await FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
         "gender": art,
       });
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Gender is Added")));
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => MainScreen()));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Gender is Added")));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (builder) => MainScreen()));
     }
   }
 }
