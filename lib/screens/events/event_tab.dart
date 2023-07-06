@@ -4,7 +4,6 @@ import 'accepted_request.dart';
 import 'all_request.dart';
 import 'denied_request.dart';
 
-
 class EventRequestTab extends StatefulWidget {
   const EventRequestTab({super.key});
 
@@ -20,9 +19,9 @@ class _EventRequestTabState extends State<EventRequestTab> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
           centerTitle: true,
-          title: Text(
+          title: const Text(
             "Event Request",
             style: TextStyle(
                 fontFamily: "ProximaNova",
@@ -30,7 +29,7 @@ class _EventRequestTabState extends State<EventRequestTab> {
                 color: Color(0xff160F29),
                 fontWeight: FontWeight.w600),
           ),
-          bottom: TabBar(
+          bottom: const TabBar(
             labelColor: Colors.black,
             tabs: <Widget>[
               Tab(
@@ -45,7 +44,7 @@ class _EventRequestTabState extends State<EventRequestTab> {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: <Widget>[
             AllRequest(),
             AcceptedRequest(),

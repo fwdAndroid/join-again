@@ -20,11 +20,11 @@ class _DeniedRequestState extends State<DeniedRequest> {
       stream: _usersStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text('Something went wrong');
+          return const Text('Something went wrong');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
+          return const Text("Loading");
         }
 
         return ListView(
@@ -35,11 +35,11 @@ class _DeniedRequestState extends State<DeniedRequest> {
             return data['joinid'] == FirebaseAuth.instance.currentUser!.uid ||
                     data['creatorid'] == FirebaseAuth.instance.currentUser!.uid
                 ? Container(
-                    margin: EdgeInsets.only(left: 10, right: 10, top: 8),
+                    margin: const EdgeInsets.only(left: 10, right: 10, top: 8),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.white,
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                               color: Colors.grey,
                               offset: Offset(0, 0),
@@ -53,7 +53,7 @@ class _DeniedRequestState extends State<DeniedRequest> {
                             children: [
                               Row(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Event Title: ",
                                     style: TextStyle(
                                         fontFamily: "ProximaNova",
@@ -61,7 +61,7 @@ class _DeniedRequestState extends State<DeniedRequest> {
                                         color: Color(0xff160F29),
                                         fontWeight: FontWeight.w600),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Text(data['title']),
@@ -69,7 +69,7 @@ class _DeniedRequestState extends State<DeniedRequest> {
                               ),
                               Row(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Joiner Name:",
                                     style: TextStyle(
                                         fontFamily: "ProximaNova",
@@ -77,7 +77,7 @@ class _DeniedRequestState extends State<DeniedRequest> {
                                         color: Color(0xff160F29),
                                         fontWeight: FontWeight.w600),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Text(data['joinname']),
@@ -87,7 +87,7 @@ class _DeniedRequestState extends State<DeniedRequest> {
                           ),
                           trailing: data['joinid'] ==
                                   FirebaseAuth.instance.currentUser!.uid
-                              ? Text("")
+                              ? const Text("")
                               : TextButton(
                                   onPressed: () {
                                     FirebaseFirestore.instance
@@ -99,12 +99,12 @@ class _DeniedRequestState extends State<DeniedRequest> {
                                           data["number of joins"] + 1
                                     }).then((value) {
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
+                                          .showSnackBar(const SnackBar(
                                               content: Text(
                                                   "User Request is accepted to join the event")));
                                     });
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Accept",
                                     style: TextStyle(color: Colors.green),
                                   ))),
