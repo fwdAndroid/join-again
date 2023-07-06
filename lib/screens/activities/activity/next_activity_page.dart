@@ -338,13 +338,19 @@ class _NextActivityPageState extends State<NextActivityPage> {
                                 day: createDateController.text,
                               )));
                 },
-                child: Text("Yes")),
+                child: const Text(
+                  "Yes",
+                  style: TextStyle(color: Colors.black),
+                )),
             TextButton(
                 onPressed: () {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (builder) => MainScreen()));
                 },
-                child: Text("No"))
+                child: const Text(
+                  "No",
+                  style: TextStyle(color: Colors.black),
+                ))
           ],
         );
       },

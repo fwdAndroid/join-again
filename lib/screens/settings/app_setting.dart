@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:join/screens/settings/edit_profile.dart';
 import 'package:join/widgets/buttons.dart';
+import 'package:join/widgets/dialog.dart';
 
 import '../first_screen/first_screen.dart';
 import '../events/event_tab.dart';
@@ -551,23 +552,6 @@ class _AppSettingState extends State<AppSetting> {
                 title: 'Logout',
               ),
             ),
-            // Container(
-            //   margin: const EdgeInsets.only(
-            //       left: 20, right: 20, top: 12, bottom: 12),
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(8), // <-- Radius
-            //         ),
-            //         fixedSize: Size(343, 48),
-            //         backgroundColor: Color(0xff246A73)),
-            //     onPressed: _logOut,
-            //     child: const Text(
-            //       "Log Out",
-            //       style: TextStyle(color: Colors.white),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -576,159 +560,73 @@ class _AppSettingState extends State<AppSetting> {
 
   Future<void> _deleteAccount() {
     return showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return Container(
-            height: 144,
-            width: 270,
-            child: AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(14.0))),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Center(
-                        child: Text(
-                      "Delete Account",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                      ),
-                    )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                        child: Text(
-                      "Are you sure you want to delete \naccount ?",
-                      style: TextStyle(
-                        color: Color(0xff736F7F),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
-                      textAlign: TextAlign.center,
-                    )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text("No"),
-                        ),
-                        VerticalDivider(
-                          color: Color(0xff3C3C43).withOpacity(.36),
-                          thickness: 2,
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            await FirebaseFirestore.instance
-                                .collection("users")
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .delete()
-                                .then((value) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                          "Account Deleted Successfully")));
-                              FirebaseAuth.instance.currentUser!.delete();
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (builder) => LoginScreen()));
-                            });
-                          },
-                          child: Text("Yes"),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return Dialogs(
+          title: "Delete Account \n\nAre you sure to delete the account?",
+          fl: [
+            TextButton(
+                onPressed: () async {
+                  await FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .delete()
+                      .then((value) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Account Deleted Successfully")));
+                    FirebaseAuth.instance.currentUser!.delete();
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (builder) => LoginScreen()));
+                  });
+                },
+                child: const Text(
+                  "Yes",
+                  style: TextStyle(color: Colors.black),
+                )),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("No"))
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _logOut() {
     return showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return Container(
-            height: 144,
-            width: 270,
-            child: AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(14.0))),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Center(
-                        child: Text(
-                      "Logout",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                      ),
-                    )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                        child: Text(
-                      "Are you sure you want to logout ?",
-                      style: TextStyle(
-                        color: Color(0xff736F7F),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
-                      textAlign: TextAlign.center,
-                    )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text("No"),
-                        ),
-                        VerticalDivider(
-                          color: Color(0xff3C3C43).withOpacity(.36),
-                          thickness: 2,
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            await FirebaseAuth.instance.signOut().then((value) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text("Logout Successfully")));
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (builder) => LoginScreen()));
-                            });
-                          },
-                          child: Text("Yes"),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return Dialogs(
+          title: "Logout\n\nAre you sure you want to logout ?",
+          fl: [
+            TextButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut().then((value) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Logout Successfully")));
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (builder) => LoginScreen()));
+                  });
+                },
+                child: const Text(
+                  "Yes",
+                  style: TextStyle(color: Colors.black),
+                )),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "No",
+                  style: TextStyle(color: Colors.black),
+                ))
+          ],
+        );
+      },
+    );
   }
 }

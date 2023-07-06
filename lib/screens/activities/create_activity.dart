@@ -462,7 +462,10 @@ class _CreateActivityState extends State<CreateActivity> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text("No"))
+                child: const Text(
+                  "No",
+                  style: TextStyle(color: Colors.black),
+                ))
           ],
         );
       },
