@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../chat/ChatListScreen.dart';
 import '../../chat/NewChatScreen.dart';
-import '../../chat/event_chat.dart';
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key});
@@ -19,25 +18,30 @@ class _MessageScreenState extends State<MessageScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (builder) => NewChatScreen()));
-                },
-                child: Icon(
-                  Icons.search,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-            )
-          ],
+          // actions: [
+          //   Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: InkWell(
+          //       onTap: () {
+          //         Navigator.push(context,
+          //             MaterialPageRoute(builder: (builder) => NewChatScreen()));
+          //       },
+          //       child: Icon(
+          //         Icons.search,
+          //         color: Theme.of(context).primaryColor,
+          //       ),
+          //     ),
+          //   )
+          // ],
           centerTitle: true,
           automaticallyImplyLeading: false,
           title: const Text(
             "Messages",
-            style: TextStyle(fontFamily: "ProximaNova", fontSize: 20, color: Color(0xff160F29), fontWeight: FontWeight.w600),
+            style: TextStyle(
+                fontFamily: "ProximaNova",
+                fontSize: 20,
+                color: Color(0xff160F29),
+                fontWeight: FontWeight.w600),
           ),
           bottom: const TabBar(
             labelColor: Colors.black,
@@ -47,10 +51,11 @@ class _MessageScreenState extends State<MessageScreen> {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: <Widget>[
-            const EventsChat(),
-            ChatListScreen(),
+            // TODOs Create Own
+            Center(child: const Text("Event Chat")),
+            Center(child: const Text("People Chat"))
           ],
         ),
       ),
