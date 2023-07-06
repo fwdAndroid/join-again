@@ -8,8 +8,12 @@ class CustomRequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Colors.grey, offset: Offset(0.1, 0.1))]),
+      // margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 05),
         child: ListTile(
@@ -20,10 +24,14 @@ class CustomRequestCard extends StatelessWidget {
           title: Text(userSnap['name']),
           subtitle: Text(userSnap['phone']),
           trailing: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(date),
-              const Text("pending..."),
+              //  change this with figma icon mail
+              Icon(
+                Icons.mail,
+                color: const Color(0xffFF7E87),
+              ),
+              const Text("Pending"),
             ],
           ),
         ),

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:join/screens/custom_navbar/dashboard/widgets/connection_and_invite_widget.dart';
 import 'package:join/screens/custom_navbar/dashboard/widgets/user_custom_card.dart';
-import 'package:join/screens/requests/request_screen.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
 
 import '../../../services/storage_services.dart';

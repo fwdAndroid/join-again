@@ -7,8 +7,11 @@ class UserCustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Colors.grey, offset: Offset(0.1, 0.1))]),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: ListTile(
@@ -29,15 +32,15 @@ class UserCustomCard extends StatelessWidget {
               height: 30,
               width: 100,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.black),
+                color: Color(0xff246A73),
+                borderRadius: BorderRadius.circular(4),
               ),
               child: const Center(
                 child: Text(
                   "Send Request",
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ),
