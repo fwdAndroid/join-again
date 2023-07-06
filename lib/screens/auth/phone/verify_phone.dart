@@ -31,15 +31,18 @@ class _VerifyPhoneState extends State<VerifyPhone> {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
-      textStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(30, 60, 87, 1), fontWeight: FontWeight.w600),
+      textStyle: const TextStyle(
+          fontSize: 20,
+          color: Color.fromRGBO(30, 60, 87, 1),
+          fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
-        border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
         borderRadius: BorderRadius.circular(20),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
+      border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
       borderRadius: BorderRadius.circular(8),
     );
 
@@ -54,19 +57,19 @@ class _VerifyPhoneState extends State<VerifyPhone> {
               height: 100,
               width: 200,
             ),
-            SizedBox(
+            const SizedBox(
+              height: 30,
+            ),
+            InkWell(
+              child: Text("verification: ${widget.codeDigits}-${widget.phone}"),
+            ),
+
+            const SizedBox(
               height: 30,
             ),
             Container(
-              child: InkWell(
-                child: Text("verification: ${widget.codeDigits}-${widget.phone}"),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 20),
+              margin: const EdgeInsets.only(
+                  left: 20, right: 20, bottom: 20, top: 20),
               child: Pinput(
                 length: 6,
                 focusNode: pinVerifyPhonePFocusNode,
@@ -76,16 +79,20 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                 onCompleted: (pin) async {
                   try {
                     await FirebaseAuth.instance
-                        .signInWithCredential(PhoneAuthProvider.credential(verificationId: verificationCode!, smsCode: pin))
+                        .signInWithCredential(PhoneAuthProvider.credential(
+                            verificationId: verificationCode!, smsCode: pin))
                         .then((value) {
                       if (value.user != null) {
-                        Navigator.push(context, MaterialPageRoute(builder: (ctx) => CheckPhoneStatus()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (ctx) => CheckPhoneStatus()));
                       }
                     });
                   } catch (e) {
                     FocusScope.of(context).unfocus();
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Invalide Code"),
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Invalid Code"),
                       duration: Duration(seconds: 12),
                     ));
                   }
@@ -93,14 +100,14 @@ class _VerifyPhoneState extends State<VerifyPhone> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 20, bottom: 20),
-              child: Text(
+              margin: const EdgeInsets.only(top: 20, bottom: 20),
+              child: const Text(
                 'Please enter the 6-digit code \n  sent to your number',
                 style: TextStyle(color: Colors.black),
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
 
@@ -122,9 +129,10 @@ class _VerifyPhoneState extends State<VerifyPhone> {
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "${widget.codeDigits + widget.phone}",
         verificationCompleted: (PhoneAuthCredential credential) async {
-          await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+          await FirebaseAuth.instance
+              .signInWithCredential(credential)
+              .then((value) {
             if (value.user != null) {
-              // Customdialog.showDialogBox(context);
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (builder) => CheckPhoneStatus(),
@@ -138,7 +146,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
           FocusScope.of(context).unfocus();
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(e.message.toString()),
-            duration: Duration(seconds: 12),
+            duration: const Duration(seconds: 12),
           ));
         },
         codeSent: (String VID, int? resentToken) {
@@ -151,7 +159,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
             verificationCode = VID;
           });
         },
-        timeout: Duration(seconds: 50));
+        timeout: const Duration(seconds: 50));
   }
 
   // void addPhone() async {

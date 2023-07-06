@@ -33,28 +33,36 @@ class _ContinuePhoneState extends State<ContinuePhone> {
                 width: 150,
                 height: 200,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 "OTP Verification",
-                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 6,
               ),
-              Text(
+              const Text(
                 "We will send you a code for verification dont share \n anyone your code",
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blueAccent), borderRadius: BorderRadius.circular(20), color: Colors.white70),
-                margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+                    border: Border.all(color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white70),
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
                 child: Row(
                   children: [
                     CountryCodePicker(
@@ -66,12 +74,12 @@ class _ContinuePhoneState extends State<ContinuePhone> {
                         initialSelection: "TH",
                         showCountryOnly: false,
                         showOnlyCountryWhenClosed: false,
-                        favorite: ["+66", "TH"]),
+                        favorite: const ["+66", "TH"]),
                     Expanded(
                       child: Container(
                         child: TextFormField(
                           validator: RequiredValidator(errorText: "Required"),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: "12345678",
                             //  prefix: Padding(padding: EdgeInsets.all(10),child: Text(dialCodeDigits,style: TextStyle(color: Colors.black),),),
@@ -84,19 +92,20 @@ class _ContinuePhoneState extends State<ContinuePhone> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: 20,
+              const SizedBox(
+                height: 40,
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (builder) => VerifyPhone(phone: _controller.text, codeDigits: dialCodeDigits)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (builder) => VerifyPhone(
+                                    phone: _controller.text,
+                                    codeDigits: dialCodeDigits)));
                       }
                     },
                     child: Text(
@@ -107,8 +116,8 @@ class _ContinuePhoneState extends State<ContinuePhone> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        backgroundColor: Color(0xff246A73),
-                        fixedSize: Size(300, 46))),
+                        backgroundColor: const Color(0xff246A73),
+                        fixedSize: const Size(300, 46))),
               ),
             ],
           ),
