@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:join/screens/profile_creation/user_phonenumber.dart';
+import 'package:join/widgets/snakbar.dart';
 
 class UserDateofBirth extends StatefulWidget {
   const UserDateofBirth({super.key});
@@ -110,8 +111,7 @@ class _UserDateofBirthState extends State<UserDateofBirth> {
 
   void createProfile() async {
     if (nameController.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Date of Birth are Required")));
+      showSnakBar("Date of Birth are Required", context);
     } else {
       setState(() {
         _isLoading = true;
@@ -125,8 +125,7 @@ class _UserDateofBirthState extends State<UserDateofBirth> {
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Date of Birth is Added")));
+      showSnakBar("Date of Birth is Added", context);
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (builder) => UserPhoneNumber()));
     }

@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:join/widgets/buttons.dart';
 import 'package:join/widgets/dialog.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
+import 'package:join/widgets/snakbar.dart';
 
 import 'activity/next_activity_page.dart';
 
@@ -438,12 +439,11 @@ class _CreateActivityState extends State<CreateActivity> {
               ),
               onPressed: () {
                 if (createTitleController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Title is Required")));
+                  showSnakBar("Title is Required", context);
                   Navigator.pop(context);
                 } else if (descriptiontextController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Description is Required")));
+                  showSnakBar("Description is Required", context);
+
                   Navigator.pop(context);
                 } else {
                   Navigator.push(

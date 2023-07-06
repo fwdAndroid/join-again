@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:join/widgets/snakbar.dart';
 
 import '../custom_navbar/custom_navbar.dart';
 
@@ -105,8 +106,7 @@ class _SelectGenderState extends State<SelectGender> {
 
   void createProfile() async {
     if (art.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
+      showSnakBar("All Fields are Required", context);
     } else {
       setState(() {
         _isLoading = true;
@@ -120,8 +120,7 @@ class _SelectGenderState extends State<SelectGender> {
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Gender is Added")));
+      showSnakBar("Gender is Added", context);
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (builder) => MainScreen()));
     }

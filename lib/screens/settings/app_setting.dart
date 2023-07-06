@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:join/screens/settings/edit_profile.dart';
 import 'package:join/widgets/buttons.dart';
 import 'package:join/widgets/dialog.dart';
+import 'package:join/widgets/snakbar.dart';
 
 import '../first_screen/first_screen.dart';
 import '../events/event_tab.dart';
@@ -573,8 +574,8 @@ class _AppSettingState extends State<AppSetting> {
                       .doc(FirebaseAuth.instance.currentUser!.uid)
                       .delete()
                       .then((value) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Account Deleted Successfully")));
+                    showSnakBar("Account Deleted Successfully", context);
+
                     FirebaseAuth.instance.currentUser!.delete();
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (builder) => LoginScreen()));
@@ -606,8 +607,7 @@ class _AppSettingState extends State<AppSetting> {
             TextButton(
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut().then((value) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Logout Successfully")));
+                    showSnakBar("Logout Successfully", context);
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (builder) => LoginScreen()));
                   });

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:join/screens/profile_creation/select_gender.dart';
+import 'package:join/widgets/snakbar.dart';
 
 class UserPhoneNumber extends StatefulWidget {
   const UserPhoneNumber({super.key});
@@ -85,8 +86,7 @@ class _UserPhoneNumberState extends State<UserPhoneNumber> {
 
   void createProfile() async {
     if (nameController.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
+      showSnakBar("All Fields are Required", context);
     } else {
       setState(() {
         _isLoading = true;
@@ -100,9 +100,8 @@ class _UserPhoneNumberState extends State<UserPhoneNumber> {
       setState(() {
         _isLoading = false;
       });
+      showSnakBar("Phone Number Added", context);
 
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Phone Number Added")));
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (builder) => SelectGender()));
     }

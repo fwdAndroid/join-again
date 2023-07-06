@@ -8,6 +8,7 @@ import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:join/widgets/buttons.dart';
+import 'package:join/widgets/snakbar.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../services/storage_services.dart';
@@ -302,10 +303,11 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                                         setState(() {
                                           loading = false;
                                         });
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                content: Text(
-                                                    "Activity Created Successfully")));
+
+                                        showSnakBar(
+                                            "Activity Created Successfully",
+                                            context);
+
                                         Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(

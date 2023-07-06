@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:join/screens/profile_creation/user_dob.dart';
 import 'package:join/services/storage_services.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
+import 'package:join/widgets/snakbar.dart';
 
 class UserPhotoEmail extends StatefulWidget {
   const UserPhotoEmail({super.key});
@@ -161,8 +162,7 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
 
   void createProfile() async {
     if (nameController.text.isEmpty || _image!.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("All Fields are Required")));
+      showSnakBar("All Fields are Required", context);
     } else {
       setState(() {
         _isLoading = true;
@@ -176,9 +176,6 @@ class _UserPhotoEmailState extends State<UserPhotoEmail> {
       setState(() {
         _isLoading = false;
       });
-
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Name and Photo Added")));
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (builder) => UserDateofBirth()));
     }

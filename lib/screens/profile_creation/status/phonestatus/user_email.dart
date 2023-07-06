@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:join/screens/profile_creation/select_gender.dart';
+import 'package:join/widgets/snakbar.dart';
 
 class UserEmail extends StatefulWidget {
   const UserEmail({super.key});
@@ -87,8 +88,7 @@ class _UserEmailState extends State<UserEmail> {
 
   void createProfile() async {
     if (nameController.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Email is Required")));
+      showSnakBar("Email are Required", context);
     } else {
       await FirebaseFirestore.instance
           .collection("users")
@@ -99,8 +99,7 @@ class _UserEmailState extends State<UserEmail> {
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Email is Added")));
+      showSnakBar("Email is Added", context);
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (builder) => SelectGender()));
     }

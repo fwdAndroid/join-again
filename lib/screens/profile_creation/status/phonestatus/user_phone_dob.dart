@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:join/screens/profile_creation/status/phonestatus/user_email.dart';
+import 'package:join/widgets/snakbar.dart';
 
 class UserPhoneDob extends StatefulWidget {
   const UserPhoneDob({super.key});
@@ -110,8 +111,7 @@ class _UserPhoneDobState extends State<UserPhoneDob> {
 
   void createProfile() async {
     if (nameController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("All Fields are Required")));
+      showSnakBar("All Fields are Required", context);
     } else {
       setState(() {
         _isLoading = true;
@@ -125,8 +125,8 @@ class _UserPhoneDobState extends State<UserPhoneDob> {
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Date of Birth is Added")));
+      showSnakBar("Date of Birth is Added", context);
+
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (builder) => UserEmail()));
     }
