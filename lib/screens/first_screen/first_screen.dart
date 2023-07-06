@@ -41,12 +41,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 60,
               ),
             ),
-            LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+            LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
               return Container(
                 height: MediaQuery.of(context).size.height * 0.74,
                 margin: const EdgeInsets.only(top: 65),
                 decoration: const BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16))),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -56,7 +60,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const Text("Log In",
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
-                          style: TextStyle(color: Color(0xff246A73), fontSize: 30, fontWeight: FontWeight.w700, fontFamily: "ProximaNova")),
+                          style: TextStyle(
+                              color: Color(0xff246A73),
+                              fontSize: 30,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "ProximaNova")),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 5, left: 15),
@@ -64,7 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Please select below option to continue.",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: TextStyle(color: Color(0xff736F7F), fontSize: 16, fontFamily: "ProximaNova", fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: Color(0xff736F7F),
+                            fontSize: 16,
+                            fontFamily: "ProximaNova",
+                            fontWeight: FontWeight.w400),
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -72,7 +84,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () async {
                         await AuthServices()
                             .signInWithGoogle()
-                            .then((value) => {Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => CheckStatus()))});
+                            .then((value) => {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (builder) => CheckStatus()))
+                                });
                       },
                       title: "Log In With Google",
                       image: "assets/googl.png",
@@ -86,7 +103,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 20),
                     AuthButton(
                       onPressed: () async {
-                        Navigator.push(context, MaterialPageRoute(builder: (builder) => const ContinuePhone()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (builder) => const ContinuePhone()));
                       },
                       title: "Log In With Phone Number",
                       image: "assets/imgGgphone.png",
@@ -97,12 +117,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(10),
                         color: const Color(0xff246A73).withOpacity(.10),
                       ),
-                      margin: const EdgeInsets.only(left: 10, top: 24, right: 10),
+                      margin:
+                          const EdgeInsets.only(left: 10, top: 24, right: 10),
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "By registering or creating an account, you agree to our Terms of Use. Read our Privacy Policy to learn more about how we process your data.",
-                          style: TextStyle(fontSize: 14, color: Color(0xff246A73), fontWeight: FontWeight.w400, fontFamily: "ProximaNova"),
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xff246A73),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "ProximaNova"),
                           textAlign: TextAlign.center,
                         ),
                       ),
