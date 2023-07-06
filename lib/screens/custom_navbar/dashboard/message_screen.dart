@@ -51,8 +51,8 @@ class _MessageScreenState extends State<MessageScreen> {
         body: const TabBarView(
           children: <Widget>[
             // TODOs Create Own
-            Center(child: const Text("Event Chat")),
-            Center(child: const Text("People Chat"))
+            Center(child: Text("Event Chat")),
+            Center(child: Text("People Chat"))
           ],
         ),
       ),
