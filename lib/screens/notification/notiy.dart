@@ -11,9 +11,9 @@ class _NotiState extends State<Noti> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 225, 243, 246),
+      backgroundColor: const Color.fromARGB(255, 225, 243, 246),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Notifications",
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
@@ -30,8 +30,8 @@ class _NotiState extends State<Noti> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 25, top: 5),
-              child: Text(
+              margin: const EdgeInsets.only(left: 25, top: 5),
+              child: const Text(
                 "Today",
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.left,
@@ -44,13 +44,13 @@ class _NotiState extends State<Noti> {
             ),
             Container(
               height: MediaQuery.of(context).size.height,
-              margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+              margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
               child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
+                      child: SizedBox(
                         width: 330,
                         child: Card(
                             color: Colors.white,
@@ -61,7 +61,7 @@ class _NotiState extends State<Noti> {
                                 width: 70,
                                 fit: BoxFit.cover,
                               ),
-                              title: Text(
+                              title: const Text(
                                 "Fay Daway join your activity",
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.left,
@@ -71,7 +71,7 @@ class _NotiState extends State<Noti> {
                                   fontFamily: "ProximaNova",
                                 ),
                               ),
-                              subtitle: Text(
+                              subtitle: const Text(
                                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. odio vel et massa quis ",
                                 style: TextStyle(
                                   fontSize: 12,
