@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:join/widgets/buttons.dart';
+import 'package:join/widgets/dialog.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
 
 import 'activity/next_activity_page.dart';
@@ -427,15 +428,9 @@ class _CreateActivityState extends State<CreateActivity> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return AlertDialog(
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Do you want to continue ?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
+        return Dialogs(
+          title: "Do you want to continue ?",
+          fl: [
             TextButton(
               child: const Text(
                 'Yes',
@@ -464,14 +459,10 @@ class _CreateActivityState extends State<CreateActivity> {
               },
             ),
             TextButton(
-              child: const Text(
-                'No',
-                style: TextStyle(color: Colors.black),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("No"))
           ],
         );
       },

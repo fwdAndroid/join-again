@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:join/widgets/buttons.dart';
+import 'package:join/widgets/dialog.dart';
 
 import '../../custom_navbar/custom_navbar.dart';
 import 'map_screen_activity.dart';
@@ -319,45 +320,31 @@ class _NextActivityPageState extends State<NextActivityPage> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return AlertDialog(
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Are you sure to continue ?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
+        return Dialogs(
+          title: "Are you sure to continue ?",
+          fl: [
             TextButton(
-              child: const Text(
-                'Yes',
-                style: TextStyle(color: Colors.black),
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (builder) => MapScreenActivity(
-                              cate: widget.cate,
-                              title: widget.title,
-                              desc: widget.description,
-                              image: widget.image,
-                              starttime: startTimeController.text,
-                              endtime: endTimeController.text,
-                              day: createDateController.text,
-                            )));
-              },
-            ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => MapScreenActivity(
+                                cate: widget.cate,
+                                title: widget.title,
+                                desc: widget.description,
+                                image: widget.image,
+                                starttime: startTimeController.text,
+                                endtime: endTimeController.text,
+                                day: createDateController.text,
+                              )));
+                },
+                child: Text("Yes")),
             TextButton(
-              child: const Text(
-                'No',
-                style: TextStyle(color: Colors.black),
-              ),
-              onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (builder) => MainScreen()));
-              },
-            ),
+                onPressed: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (builder) => MainScreen()));
+                },
+                child: Text("No"))
           ],
         );
       },
