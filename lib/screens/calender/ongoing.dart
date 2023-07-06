@@ -13,30 +13,38 @@ class OnGoing extends StatefulWidget {
 }
 
 class _OnGoingState extends State<OnGoing> {
-  final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('activity').where("activitystatus", isEqualTo: "ongoing").snapshots();
+  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
+      .collection('activity')
+      .where("activitystatus", isEqualTo: "ongoing")
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: _usersStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text('Something went wrong');
+          return const Text('Something went wrong');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
+          return const Text("Loading");
         }
 
         return ListView(
           children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+            Map<String, dynamic> data =
+                document.data()! as Map<String, dynamic>;
             return Container(
-              margin: EdgeInsets.only(left: 10, right: 10, top: 8),
+              margin: const EdgeInsets.only(left: 10, right: 10, top: 8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.white,
-                  boxShadow: [BoxShadow(color: Colors.grey, offset: Offset(0, 0), blurRadius: 0.5)]),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0, 0),
+                        blurRadius: 0.5)
+                  ]),
               child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Column(
@@ -63,7 +71,7 @@ class _OnGoingState extends State<OnGoing> {
                             ),
                           );
                         },
-                        child: Container(
+                        child: SizedBox(
                           height: 100,
                           child: Stack(
                             children: [
@@ -91,27 +99,33 @@ class _OnGoingState extends State<OnGoing> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 4.0),
                         child: Text(
                           data['title'],
-                          style: TextStyle(fontWeight: FontWeight.w600, color: Color(0xff160F29), fontSize: 16),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xff160F29),
+                              fontSize: 16),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 4.0),
                         child: Text(
                           data['description'],
-                          style: TextStyle(fontWeight: FontWeight.w400, color: Color(0xff160F29).withOpacity(.6), fontSize: 12),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: const Color(0xff160F29).withOpacity(.6),
+                              fontSize: 12),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
                       Padding(
@@ -123,53 +137,73 @@ class _OnGoingState extends State<OnGoing> {
                               width: 14,
                               height: 15,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
                               data['date'],
-                              style: TextStyle(fontWeight: FontWeight.w400, color: Color(0xff160F29).withOpacity(.6), fontSize: 12),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color:
+                                      const Color(0xff160F29).withOpacity(.6),
+                                  fontSize: 12),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
                               data['startTime'],
-                              style: TextStyle(fontWeight: FontWeight.w400, color: Color(0xff160F29).withOpacity(.6), fontSize: 12),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color:
+                                      const Color(0xff160F29).withOpacity(.6),
+                                  fontSize: 12),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
                               "to",
-                              style: TextStyle(fontWeight: FontWeight.w400, color: Color(0xff160F29).withOpacity(.6), fontSize: 12),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color:
+                                      const Color(0xff160F29).withOpacity(.6),
+                                  fontSize: 12),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
                               data['endTime'],
-                              style: TextStyle(fontWeight: FontWeight.w400, color: Color(0xff160F29).withOpacity(.6), fontSize: 12),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color:
+                                      const Color(0xff160F29).withOpacity(.6),
+                                  fontSize: 12),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Container(
                               width: 64,
                               height: 20,
                               decoration: BoxDecoration(
-                                color: Color(0xff246A73).withOpacity(.10),
+                                color: const Color(0xff246A73).withOpacity(.10),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: Center(
                                   child: Text(
-                                    data['numberofjoiners'].toString() + '  Going',
-                                    style: TextStyle(fontWeight: FontWeight.w400, color: Color(0xff246A73), fontSize: 12),
+                                    data['numberofjoiners'].toString() +
+                                        '  Going',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff246A73),
+                                        fontSize: 12),
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                           ],
