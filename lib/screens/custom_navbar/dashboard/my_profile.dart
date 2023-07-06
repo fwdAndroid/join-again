@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:join/screens/custom_navbar/dashboard/widgets/connection_and_invite_widget.dart';
 import 'package:join/screens/custom_navbar/dashboard/widgets/user_custom_card.dart';
+import 'package:join/screens/requests/request_screen.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
 
 import '../../../services/storage_services.dart';
@@ -111,15 +112,22 @@ class _MyProfileState extends State<MyProfile> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (builder) => const AppSetting()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => const AppSetting()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(height: 40, width: 40, child: Image.asset("assets/set.png")),
+                      child: SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: Image.asset("assets/set.png")),
                     ),
                   )
                 ],
               ),
+
               SizedBox(
                 height: 250,
                 child: Stack(
@@ -145,21 +153,29 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                     Center(
                       child: Container(
-                        margin: const EdgeInsets.only(left: 16, right: 16, top: 60),
+                        margin:
+                            const EdgeInsets.only(left: 16, right: 16, top: 60),
                         alignment: Alignment.center,
                         height: 170,
                         width: 300,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
-                            boxShadow: const [BoxShadow(offset: Offset(0, 0), color: Colors.grey, blurRadius: 2)]),
+                            boxShadow: const [
+                              BoxShadow(
+                                  offset: Offset(0, 0),
+                                  color: Colors.grey,
+                                  blurRadius: 2)
+                            ]),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             StreamBuilder(
-                                stream:
-                                    FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
+                                stream: FirebaseFirestore.instance
+                                    .collection("users")
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .snapshots(),
                                 builder: (context, AsyncSnapshot snapshot) {
                                   if (!snapshot.hasData) {
                                     return const CircularProgressIndicator();
@@ -175,11 +191,13 @@ class _MyProfileState extends State<MyProfile> {
                                           height: 61,
                                           width: 61,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(30),
+                                            borderRadius:
+                                                BorderRadius.circular(30),
                                           ),
                                           child: CircleAvatar(
                                             radius: 80,
-                                            backgroundImage: NetworkImage(document['photo'].toString()),
+                                            backgroundImage: NetworkImage(
+                                                document['photo'].toString()),
                                           ),
                                         ),
                                       ),
@@ -199,7 +217,8 @@ class _MyProfileState extends State<MyProfile> {
                               child: StreamBuilder(
                                   stream: FirebaseFirestore.instance
                                       .collection("users")
-                                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
                                       .snapshots(),
                                   builder: (context, AsyncSnapshot snapshot) {
                                     if (!snapshot.hasData) {
@@ -211,7 +230,10 @@ class _MyProfileState extends State<MyProfile> {
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.left,
                                       style: const TextStyle(
-                                          color: Color(0xff160F29), fontWeight: FontWeight.w600, fontFamily: "ProximaNova", fontSize: 18),
+                                          color: Color(0xff160F29),
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: "ProximaNova",
+                                          fontSize: 18),
                                     );
                                   }),
                             ),
@@ -232,7 +254,9 @@ class _MyProfileState extends State<MyProfile> {
                 SizedBox(
                   height: 400,
                   child: StreamBuilder(
-                    stream: FirebaseFirestore.instance.collection("users").snapshots(),
+                    stream: FirebaseFirestore.instance
+                        .collection("users")
+                        .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return const Center(
@@ -244,9 +268,12 @@ class _MyProfileState extends State<MyProfile> {
                         itemBuilder: (context, index) {
                           var data = snapshot.data!.docs[index];
 
-                          if (data['uid'].toString().toLowerCase().contains(searchController.text.toLowerCase()) ||
-                              data['name'].toString().toLowerCase().contains(searchController.text.toLowerCase()) ||
-                              data['email'].toString().toLowerCase().contains(searchController.text.toLowerCase())) {
+                          if (data['uid'].toString().toLowerCase().contains(
+                                  searchController.text.toLowerCase()) ||
+                              data['name'].toString().toLowerCase().contains(
+                                  searchController.text.toLowerCase()) ||
+                              data['email'].toString().toLowerCase().contains(
+                                  searchController.text.toLowerCase())) {
                             return UserCustomCard(data: data);
                           } else {
                             return const SizedBox();
@@ -293,10 +320,16 @@ class _MyProfileState extends State<MyProfile> {
                 ),
               ),
               onPressed: () async {
-                String photoURL = await StorageServices().uploadImageToStorage('ProfilePics', _image!, false);
-                FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({"photo": photoURL});
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Image Updated Succesfully")));
-                Navigator.push(context, MaterialPageRoute(builder: (builder) => MainScreen()));
+                String photoURL = await StorageServices()
+                    .uploadImageToStorage('ProfilePics', _image!, false);
+                FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .update({"photo": photoURL});
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Image Updated Succesfully")));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (builder) => MainScreen()));
               },
             ),
             TextButton(

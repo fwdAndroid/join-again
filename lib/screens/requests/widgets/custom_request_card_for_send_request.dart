@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class CustomRequestCard extends StatelessWidget {
   final dynamic userSnap;
   final dynamic date;
-  const CustomRequestCard({Key? key, this.userSnap, this.date}) : super(key: key);
+  const CustomRequestCard({Key? key, this.userSnap, this.date})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
