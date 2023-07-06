@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:join/widgets/buttons.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
 
 import '../custom_navbar/custom_navbar.dart';
@@ -505,37 +506,27 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                     ),
                     Container(
-                        margin: const EdgeInsets.all(12),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff246A73),
-                              fixedSize: const Size(342, 48),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8))),
-                          onPressed: () async {
-                            // String photoURL = await StorageMethods()
-                            //     .uploadImageToStorage(
-                            //         'ProfilePics', _image, false);
-                            FirebaseFirestore.instance
-                                .collection("users")
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .update({
-                              "name": nameController.text,
-                              "dob": dateofBrithController.text,
-                              "gender": dropdownvalueController.text,
-                            });
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (builder) => MainScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Save",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ))
+                      margin: const EdgeInsets.all(12),
+                      child: JoinButton(
+                        onPressed: () async {
+                          FirebaseFirestore.instance
+                              .collection("users")
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .update({
+                            "name": nameController.text,
+                            "dob": dateofBrithController.text,
+                            "gender": dropdownvalueController.text,
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (builder) => MainScreen(),
+                            ),
+                          );
+                        },
+                        title: 'Save',
+                      ),
+                    ),
                   ]);
             }),
       ),

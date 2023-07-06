@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:join/widgets/buttons.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../custom_navbar/custom_navbar.dart';
@@ -318,69 +319,53 @@ class _DetailPageState extends State<DetailPage> {
                                           color: Color(0xff368F8B),
                                         ))
                                       : Center(
-                                          child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                  backgroundColor:
-                                                      const Color(0xff368F8B),
-                                                  fixedSize:
-                                                      const Size(321, 50)),
-                                              onPressed: () async {
-                                                setState(() {
-                                                  isLoading = true;
-                                                });
-                                                var uuid = Uuid().v4();
-                                                await FirebaseFirestore.instance
-                                                    .collection("joins")
-                                                    .doc(uuid)
-                                                    .set({
-                                                  "previousuuid": widget.uuid,
-                                                  "title": widget.title,
-                                                  "status": "ongoing",
-                                                  "number of joins": 0,
-                                                  "startTime": widget.startTime,
-                                                  "endTime": widget.endTime,
-                                                  "date": widget.date,
-                                                  "image": widget.image,
-                                                  "desc": widget.desc,
-                                                  "joinname": document['name'],
-                                                  "creatorid": widget.createid,
-                                                  "currentuuid": uuid,
-                                                  "joinid": FirebaseAuth
-                                                      .instance
-                                                      .currentUser!
-                                                      .uid,
-                                                  "joinedRequest": "pending"
-                                                }).then(
-                                                  (value) => {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      const SnackBar(
-                                                        content: Text(
-                                                            "Event Join Request Send"),
-                                                      ),
+                                          child: JoinButton(
+                                            onPressed: () async {
+                                              setState(() {
+                                                isLoading = true;
+                                              });
+                                              var uuid = Uuid().v4();
+                                              await FirebaseFirestore.instance
+                                                  .collection("joins")
+                                                  .doc(uuid)
+                                                  .set({
+                                                "previousuuid": widget.uuid,
+                                                "title": widget.title,
+                                                "status": "ongoing",
+                                                "number of joins": 0,
+                                                "startTime": widget.startTime,
+                                                "endTime": widget.endTime,
+                                                "date": widget.date,
+                                                "image": widget.image,
+                                                "desc": widget.desc,
+                                                "joinname": document['name'],
+                                                "creatorid": widget.createid,
+                                                "currentuuid": uuid,
+                                                "joinid": FirebaseAuth
+                                                    .instance.currentUser!.uid,
+                                                "joinedRequest": "pending"
+                                              }).then(
+                                                (value) => {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                          "Event Join Request Send"),
                                                     ),
-                                                    Navigator.pushReplacement(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (builder) =>
-                                                                MainScreen()))
-                                                  },
-                                                );
-                                                setState(() {
-                                                  isLoading = false;
-                                                });
-                                              },
-                                              child: const Text(
-                                                "Join",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              )),
+                                                  ),
+                                                  Navigator.pushReplacement(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (builder) =>
+                                                              MainScreen()))
+                                                },
+                                              );
+                                              setState(() {
+                                                isLoading = false;
+                                              });
+                                            },
+                                            title: 'Join',
+                                          ),
                                         )
                             ],
                           ),

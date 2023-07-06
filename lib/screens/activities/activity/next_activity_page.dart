@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:join/widgets/buttons.dart';
 
 import '../../custom_navbar/custom_navbar.dart';
 import 'map_screen_activity.dart';
@@ -267,18 +268,10 @@ class _NextActivityPageState extends State<NextActivityPage> {
           ),
           Container(
             margin: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    fixedSize: const Size(343, 48),
-                    backgroundColor: const Color(0xff246A73)),
-                onPressed: createProfile,
-                child: const Text(
-                  "Ready To Share",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                )),
+            child: JoinButton(
+              onPressed: createProfile,
+              title: 'Ready To Share',
+            ),
           ),
         ],
       ),
@@ -327,7 +320,7 @@ class _NextActivityPageState extends State<NextActivityPage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text('Are you sure to continue ?'),

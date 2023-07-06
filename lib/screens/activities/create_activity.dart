@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:join/widgets/buttons.dart';
 import 'package:join/widgets/image_uploading_widget.dart';
 
 import 'activity/next_activity_page.dart';
@@ -403,18 +404,10 @@ class _CreateActivityState extends State<CreateActivity> {
             ),
             Container(
               margin: const EdgeInsets.all(15),
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      fixedSize: const Size(343, 48),
-                      backgroundColor: const Color(0xff246A73)),
-                  onPressed: dialog,
-                  child: const Text(
-                    "Next",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )),
+              child: JoinButton(
+                onPressed: dialog,
+                title: 'Next',
+              ),
             )
           ],
         ),
@@ -451,11 +444,11 @@ class _CreateActivityState extends State<CreateActivity> {
               onPressed: () {
                 if (createTitleController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Title is Required")));
+                      const SnackBar(content: Text("Title is Required")));
                   Navigator.pop(context);
                 } else if (descriptiontextController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Description is Required")));
+                      const SnackBar(content: Text("Description is Required")));
                   Navigator.pop(context);
                 } else {
                   Navigator.push(

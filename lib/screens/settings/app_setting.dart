@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:join/screens/settings/edit_profile.dart';
+import 'package:join/widgets/buttons.dart';
 
 import '../first_screen/first_screen.dart';
 import '../events/event_tab.dart';
@@ -545,20 +546,28 @@ class _AppSettingState extends State<AppSetting> {
             Container(
               margin: const EdgeInsets.only(
                   left: 20, right: 20, top: 12, bottom: 12),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8), // <-- Radius
-                    ),
-                    fixedSize: Size(343, 48),
-                    backgroundColor: Color(0xff246A73)),
+              child: JoinButton(
                 onPressed: _logOut,
-                child: const Text(
-                  "Log Out",
-                  style: TextStyle(color: Colors.white),
-                ),
+                title: 'Logout',
               ),
             ),
+            // Container(
+            //   margin: const EdgeInsets.only(
+            //       left: 20, right: 20, top: 12, bottom: 12),
+            //   child: ElevatedButton(
+            //     style: ElevatedButton.styleFrom(
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(8), // <-- Radius
+            //         ),
+            //         fixedSize: Size(343, 48),
+            //         backgroundColor: Color(0xff246A73)),
+            //     onPressed: _logOut,
+            //     child: const Text(
+            //       "Log Out",
+            //       style: TextStyle(color: Colors.white),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

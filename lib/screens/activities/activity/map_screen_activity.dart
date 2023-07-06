@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:join/widgets/buttons.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../services/storage_services.dart';
@@ -253,78 +254,68 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                             margin: const EdgeInsets.only(
                                 left: 15, right: 15, top: 10, bottom: 10),
                             child: Center(
-                                child: loading
-                                    ? const Center(
-                                        child: CircularProgressIndicator(),
-                                      )
-                                    : ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            fixedSize: const Size(343, 48),
-                                            backgroundColor:
-                                                const Color(0xff246A73)),
-                                        onPressed: () async {
-                                          setState(() {
-                                            loading = true;
-                                          });
+                              child: loading
+                                  ? const Center(
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : JoinButton(
+                                      onPressed: () async {
+                                        setState(() {
+                                          loading = true;
+                                        });
 
-                                          Position position = await Geolocator
-                                              .getCurrentPosition(
-                                                  desiredAccuracy:
-                                                      LocationAccuracy.best);
+                                        Position position =
+                                            await Geolocator.getCurrentPosition(
+                                                desiredAccuracy:
+                                                    LocationAccuracy.best);
 
-                                          String photoURL =
-                                              await StorageServices()
-                                                  .uploadImageToStorage(
-                                                      'UserPics',
-                                                      widget.image!,
-                                                      true);
+                                        String photoURL =
+                                            await StorageServices()
+                                                .uploadImageToStorage(
+                                                    'UserPics',
+                                                    widget.image!,
+                                                    true);
 
-                                          FirebaseFirestore.instance
-                                              .collection("activity")
-                                              .doc(uuid)
-                                              .set({
-                                            "title": widget.title,
-                                            "uuid": uuid,
-                                            "description": widget.desc,
-                                            "address": _locationController.text,
-                                            "category": widget.cate,
-                                            "photo": photoURL,
-                                            "latitude":
-                                                position.latitude, //Issue
-                                            "longitude":
-                                                position.longitude, // Issue
-                                            "date": widget.day,
-                                            "uid": FirebaseAuth
-                                                .instance.currentUser!.uid,
-                                            "startTime": widget.starttime,
-                                            "endTime": widget.endtime,
-                                            "activity": widget.cate,
-                                            "activitystatus": "ongoing",
-                                            "numberofjoiners": 0,
-                                          });
+                                        FirebaseFirestore.instance
+                                            .collection("activity")
+                                            .doc(uuid)
+                                            .set({
+                                          "title": widget.title,
+                                          "uuid": uuid,
+                                          "description": widget.desc,
+                                          "address": _locationController.text,
+                                          "category": widget.cate,
+                                          "photo": photoURL,
+                                          "latitude": position.latitude, //Issue
+                                          "longitude":
+                                              position.longitude, // Issue
+                                          "date": widget.day,
+                                          "uid": FirebaseAuth
+                                              .instance.currentUser!.uid,
+                                          "startTime": widget.starttime,
+                                          "endTime": widget.endtime,
+                                          "activity": widget.cate,
+                                          "activitystatus": "ongoing",
+                                          "numberofjoiners": 0,
+                                        });
 
-                                          setState(() {
-                                            loading = false;
-                                          });
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  content: Text(
-                                                      "Activity Created Successfully")));
-                                          Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (builder) =>
-                                                      MainScreen()));
-                                        },
-                                        child: const Text(
-                                          "Save",
-                                          style: TextStyle(color: Colors.white),
-                                        ))),
-                          )
+                                        setState(() {
+                                          loading = false;
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                content: Text(
+                                                    "Activity Created Successfully")));
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (builder) =>
+                                                    MainScreen()));
+                                      },
+                                      title: 'Save',
+                                    ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
