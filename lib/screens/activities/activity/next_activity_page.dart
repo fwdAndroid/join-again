@@ -10,7 +10,12 @@ class NextActivityPage extends StatefulWidget {
   final image;
   final cate;
 
-  const NextActivityPage({super.key, required this.description, required this.image, required this.cate, required this.title});
+  const NextActivityPage(
+      {super.key,
+      required this.description,
+      required this.image,
+      required this.cate,
+      required this.title});
 
   @override
   State<NextActivityPage> createState() => _NextActivityPageState();
@@ -41,38 +46,46 @@ class _NextActivityPageState extends State<NextActivityPage> {
     //     ? const LatLng(25.276987, 55.296249)
     //     : LatLng(latlong[0], latlong[1]);
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 225, 243, 246),
+      backgroundColor: const Color.fromARGB(255, 225, 243, 246),
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Create Activity",
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
-          style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w700, fontSize: 17, color: Color(0xff160F29)),
+          style: TextStyle(
+              fontFamily: "ProximaNova",
+              fontWeight: FontWeight.w700,
+              fontSize: 17,
+              color: Color(0xff160F29)),
         ),
       ),
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 12, bottom: 1, top: 12),
+            padding: const EdgeInsets.only(left: 12, bottom: 1, top: 12),
             child: Row(children: [
               Image.asset(
                 "assets/select.png",
                 height: 18,
                 width: 18,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text(
+              const Text(
                 "Select Date",
-                style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
+                style: TextStyle(
+                    fontFamily: "ProximaNova",
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                    color: Color(0xff736F7F)),
               ),
             ]),
           ),
           Container(
-            margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+            margin: const EdgeInsets.only(left: 15, right: 15, top: 10),
             child: TextFormField(
               onTap: () {
                 _selectDate(context);
@@ -88,49 +101,60 @@ class _NextActivityPageState extends State<NextActivityPage> {
                 ),
                 filled: true,
                 fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.white)),
+                disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.white)),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.white)),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Colors.white)),
                 hintText: "12/04/2023",
-                helperStyle: TextStyle(
+                helperStyle: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w200,
                   color: Colors.grey,
                 ),
               ),
-              autofocus: true,
               controller: createDateController,
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 12, right: 12, top: 10),
+            margin: const EdgeInsets.only(left: 12, right: 12, top: 10),
             child: Row(children: [
               Expanded(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 10, bottom: 1, top: 12),
+                    padding:
+                        const EdgeInsets.only(left: 10, bottom: 1, top: 12),
                     child: Row(children: [
                       Image.asset(
                         "assets/clock.png",
                         height: 18,
                         width: 18,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
-                      Text(
+                      const Text(
                         "Start Time",
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            color: Color(0xff736F7F)),
                       ),
                     ]),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Container(
+                  SizedBox(
                     width: 161,
                     height: 46,
                     child: TextField(
@@ -139,7 +163,8 @@ class _NextActivityPageState extends State<NextActivityPage> {
                       },
                       controller: startTimeController,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 20, left: 10),
+                        contentPadding:
+                            const EdgeInsets.only(top: 20, left: 10),
                         suffixIcon: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.asset(
@@ -151,45 +176,55 @@ class _NextActivityPageState extends State<NextActivityPage> {
                         hintText: "10 : 00 AM",
                         filled: true,
                         fillColor: Colors.white,
-                        focusedBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                        disabledBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                        enabledBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(color: Colors.white)),
+                        disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(color: Colors.white)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(color: Colors.white)),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(color: Colors.white)),
                       ),
                     ),
                   ),
                 ],
               )),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
                   child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 12, bottom: 1, top: 12),
+                    padding:
+                        const EdgeInsets.only(left: 12, bottom: 1, top: 12),
                     child: Row(children: [
                       Image.asset(
                         "assets/clock.png",
                         height: 18,
                         width: 18,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
-                      Text(
+                      const Text(
                         "End Time",
-                        style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
+                        style: TextStyle(
+                            fontFamily: "ProximaNova",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            color: Color(0xff736F7F)),
                       ),
                     ]),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Container(
+                  SizedBox(
                     width: 161,
                     height: 46,
                     child: TextField(
@@ -198,7 +233,8 @@ class _NextActivityPageState extends State<NextActivityPage> {
                       },
                       controller: endTimeController,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 20, left: 10),
+                        contentPadding:
+                            const EdgeInsets.only(top: 20, left: 10),
                         suffixIcon: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.asset(
@@ -210,13 +246,18 @@ class _NextActivityPageState extends State<NextActivityPage> {
                         hintText: "10 : 00 AM",
                         filled: true,
                         fillColor: Colors.white,
-                        focusedBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                        disabledBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                        enabledBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(color: Colors.white)),
+                        disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(color: Colors.white)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(color: Colors.white)),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(color: Colors.white)),
                       ),
                     ),
                   ),
@@ -225,16 +266,16 @@ class _NextActivityPageState extends State<NextActivityPage> {
             ]),
           ),
           Container(
-            margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+            margin: const EdgeInsets.only(left: 15, right: 15, top: 15),
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    fixedSize: Size(343, 48),
-                    backgroundColor: Color(0xff246A73)),
+                    fixedSize: const Size(343, 48),
+                    backgroundColor: const Color(0xff246A73)),
                 onPressed: createProfile,
-                child: Text(
+                child: const Text(
                   "Ready To Share",
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 )),
@@ -274,7 +315,9 @@ class _NextActivityPageState extends State<NextActivityPage> {
       _selectedDate = newSelectedDate;
       createDateController
         ..text = DateFormat.yMMMd().format(_selectedDate!)
-        ..selection = TextSelection.fromPosition(TextPosition(offset: createDateController.text.length, affinity: TextAffinity.upstream));
+        ..selection = TextSelection.fromPosition(TextPosition(
+            offset: createDateController.text.length,
+            affinity: TextAffinity.upstream));
     }
   }
 
@@ -318,7 +361,8 @@ class _NextActivityPageState extends State<NextActivityPage> {
                 style: TextStyle(color: Colors.black),
               ),
               onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => MainScreen()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (builder) => MainScreen()));
               },
             ),
           ],

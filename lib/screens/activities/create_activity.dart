@@ -41,64 +41,78 @@ class _CreateActivityState extends State<CreateActivity> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color.fromARGB(255, 225, 243, 246),
+      backgroundColor: const Color.fromARGB(255, 225, 243, 246),
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Create Activity",
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
-          style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w700, fontSize: 17, color: Color(0xff160F29)),
+          style: TextStyle(
+              fontFamily: "ProximaNova",
+              fontWeight: FontWeight.w700,
+              fontSize: 17,
+              color: Color(0xff160F29)),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 12, bottom: 1),
+              padding: const EdgeInsets.only(left: 12, bottom: 1),
               child: Row(children: [
                 Image.asset(
                   "assets/Group 6870.png",
                   height: 18,
                   width: 18,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
-                Text(
+                const Text(
                   "Add Title Name ",
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      color: Color(0xff736F7F)),
                 ),
               ]),
             ),
             Container(
-              margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+              margin: const EdgeInsets.only(left: 15, right: 15, top: 10),
               child: TextFormField(
                 decoration: InputDecoration(
                   filled: true,
-                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                  disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: const BorderSide(color: Colors.white)),
+                  disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: const BorderSide(color: Colors.white)),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: const BorderSide(color: Colors.white)),
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Color(0xff368F8B))),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: const BorderSide(color: Color(0xff368F8B))),
                   hintText: "Wes Yabinlatelee",
-                  helperStyle: TextStyle(
+                  helperStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff736F7F),
                   ),
                 ),
                 focusNode: FocusNode(),
-                autofocus: true,
                 controller: createTitleController,
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 12, bottom: 1, top: 12),
+              padding: const EdgeInsets.only(left: 12, bottom: 1, top: 12),
               child: Row(
                 children: [
                   Image.asset(
@@ -106,12 +120,15 @@ class _CreateActivityState extends State<CreateActivity> {
                     height: 18,
                     width: 18,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
-                  Text(
+                  const Text(
                     "Choose Category",
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        color: Color(0xff736F7F)),
                   ),
                 ],
               ),
@@ -120,7 +137,7 @@ class _CreateActivityState extends State<CreateActivity> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6.0),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.grey,
                     offset: Offset(0.0, 0.1), //(x,y)
@@ -128,7 +145,7 @@ class _CreateActivityState extends State<CreateActivity> {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+              margin: const EdgeInsets.only(left: 15, right: 15, top: 10),
               child: DropdownButtonFormField<String>(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -153,7 +170,8 @@ class _CreateActivityState extends State<CreateActivity> {
                     art = value!;
                   });
                 },
-                items: dropdownItemList.map<DropdownMenuItem<String>>((String value) {
+                items: dropdownItemList
+                    .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -162,7 +180,7 @@ class _CreateActivityState extends State<CreateActivity> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 15, bottom: 1, top: 10),
+              padding: const EdgeInsets.only(left: 15, bottom: 1, top: 10),
               child: Row(
                 children: [
                   Image.asset(
@@ -170,12 +188,15 @@ class _CreateActivityState extends State<CreateActivity> {
                     height: 18,
                     width: 18,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
-                  Text(
+                  const Text(
                     "Description",
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff736F7F)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        color: Color(0xff736F7F)),
                   ),
                 ],
               ),
@@ -186,7 +207,7 @@ class _CreateActivityState extends State<CreateActivity> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.grey,
                     offset: Offset(0.0, 0.1), //(x,y)
@@ -194,24 +215,29 @@ class _CreateActivityState extends State<CreateActivity> {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 left: 15,
                 top: 10,
                 right: 15,
               ),
               child: TextFormField(
                 decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                  disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
-                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Colors.white)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: const BorderSide(color: Colors.white)),
+                  disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: const BorderSide(color: Colors.white)),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: const BorderSide(color: Colors.white)),
                   fillColor: Colors.white,
                   filled: true,
-                  contentPadding: EdgeInsets.only(left: 15, top: 40),
+                  contentPadding: const EdgeInsets.only(left: 15, top: 40),
                   border: InputBorder.none,
                   hintText: "Add description",
                 ),
                 focusNode: FocusNode(),
-                autofocus: true,
                 controller: descriptiontextController,
                 maxLines: 6,
               ),
@@ -219,9 +245,10 @@ class _CreateActivityState extends State<CreateActivity> {
             InkWell(
               onTap: () => selectImage(),
               child: Container(
-                margin: EdgeInsets.only(top: 20, right: 15, left: 15),
+                margin: const EdgeInsets.only(top: 20, right: 15, left: 15),
                 child: _image != null
-                    ? CircleAvatar(radius: 59, backgroundImage: MemoryImage(_image!))
+                    ? CircleAvatar(
+                        radius: 59, backgroundImage: MemoryImage(_image!))
                     : Image.asset(
                         "assets/Group 6860.png",
                         width: 343,
@@ -234,7 +261,7 @@ class _CreateActivityState extends State<CreateActivity> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.grey,
                     offset: Offset(0.0, 0.1), //(x,y)
@@ -242,12 +269,12 @@ class _CreateActivityState extends State<CreateActivity> {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 left: 15,
                 top: 22,
                 right: 15,
               ),
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 left: 20,
                 top: 16,
                 right: 20,
@@ -262,7 +289,7 @@ class _CreateActivityState extends State<CreateActivity> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 1,
                         ),
                         child: SwitchListTile(
@@ -273,11 +300,14 @@ class _CreateActivityState extends State<CreateActivity> {
                               switchValue1 = value!;
                             });
                           },
-                          subtitle: Text(
+                          subtitle: const Text(
                             "Activate this Button to be able to accept or reject new users to your activity",
                             maxLines: null,
                             textAlign: TextAlign.left,
-                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xff736F7F)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: Color(0xff736F7F)),
                           ),
                           title: const Text(
                             'Private / On Request',
@@ -289,7 +319,7 @@ class _CreateActivityState extends State<CreateActivity> {
                                 fontWeight: FontWeight.w600),
                           ),
                         )),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(
                         top: 19,
                       ),
@@ -299,22 +329,25 @@ class _CreateActivityState extends State<CreateActivity> {
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 1,
                         ),
                         child: SwitchListTile(
-                          activeColor: Color(0xffFF6F79),
+                          activeColor: const Color(0xffFF6F79),
                           value: switchValue2,
                           onChanged: (bool? value) {
                             setState(() {
                               switchValue2 = value!;
                             });
                           },
-                          subtitle: Text(
+                          subtitle: const Text(
                             "Get notified when someone is joining your activity.",
                             maxLines: null,
                             textAlign: TextAlign.left,
-                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xff736F7F)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: Color(0xff736F7F)),
                           ),
                           title: const Text(
                             'Notifications',
@@ -326,7 +359,7 @@ class _CreateActivityState extends State<CreateActivity> {
                                 fontWeight: FontWeight.w600),
                           ),
                         )),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(
                         top: 19,
                       ),
@@ -336,22 +369,25 @@ class _CreateActivityState extends State<CreateActivity> {
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 1,
                         ),
                         child: SwitchListTile(
-                          activeColor: Color(0xffFF6F79),
+                          activeColor: const Color(0xffFF6F79),
                           value: switchValue3,
                           onChanged: (bool? value) {
                             setState(() {
                               switchValue3 = value!;
                             });
                           },
-                          subtitle: Text(
+                          subtitle: const Text(
                             "Toggle if this is activity shall be repeated.",
                             maxLines: null,
                             textAlign: TextAlign.left,
-                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xff736F7F)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: Color(0xff736F7F)),
                           ),
                           title: const Text(
                             'Repeat',
@@ -366,16 +402,16 @@ class _CreateActivityState extends State<CreateActivity> {
                   ]),
             ),
             Container(
-              margin: EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      fixedSize: Size(343, 48),
-                      backgroundColor: Color(0xff246A73)),
+                      fixedSize: const Size(343, 48),
+                      backgroundColor: const Color(0xff246A73)),
                   onPressed: dialog,
-                  child: Text(
+                  child: const Text(
                     "Next",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   )),
@@ -414,10 +450,12 @@ class _CreateActivityState extends State<CreateActivity> {
               ),
               onPressed: () {
                 if (createTitleController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Title is Required")));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Title is Required")));
                   Navigator.pop(context);
                 } else if (descriptiontextController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Description is Required")));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Description is Required")));
                   Navigator.pop(context);
                 } else {
                   Navigator.push(
