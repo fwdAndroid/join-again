@@ -23,18 +23,23 @@ class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 225, 243, 246),
+      backgroundColor: const Color.fromARGB(255, 225, 243, 246),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           "My Profile",
-          style: TextStyle(fontFamily: "ProximaNova", fontSize: 20, color: Color(0xff160F29), fontWeight: FontWeight.w600),
+          style: TextStyle(
+              fontFamily: "ProximaNova",
+              fontSize: 20,
+              color: Color(0xff160F29),
+              fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         actions: [
           InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (builder) => AppSetting()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => AppSetting()));
 /*
               Navigator.push(context,
                   MaterialPageRoute(builder: (builder) =>  ChatScreen(UserModel(uid: 'a3IwdwOqpTMD2mc1LyQCwIWuUTq1',name: 'testing',email: 'test@gmail.com',phoneNumber: '+923078508248',photoUrl: 'https://firebasestorage.googleapis.com/v0/b/join-a0ce2.appspot.com/o/ProfilePics%2Fa3IwdwOqpTMD2mc1LyQCwIWuUTq1?alt=media&token=9f01fd6a-d3af-4630-861a-ca87eb79e942'))
@@ -50,13 +55,13 @@ class _MyProfileState extends State<MyProfile> {
       ),
       body: Column(
         children: [
-          Container(
+          SizedBox(
             height: 250,
             child: Stack(
               children: [
                 Container(
                   height: 200,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment(
                         1,
@@ -75,27 +80,35 @@ class _MyProfileState extends State<MyProfile> {
                 ),
                 Center(
                   child: Container(
-                    margin: EdgeInsets.only(left: 16, right: 16, top: 60),
+                    margin: const EdgeInsets.only(left: 16, right: 16, top: 60),
                     alignment: Alignment.center,
                     height: 170,
                     width: 300,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
-                        boxShadow: [BoxShadow(offset: Offset(0, 0), color: Colors.grey, blurRadius: 2)]),
+                        boxShadow: const [
+                          BoxShadow(
+                              offset: Offset(0, 0),
+                              color: Colors.grey,
+                              blurRadius: 2)
+                        ]),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         StreamBuilder(
-                            stream: FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
+                            stream: FirebaseFirestore.instance
+                                .collection("users")
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .snapshots(),
                             builder: (context, AsyncSnapshot snapshot) {
                               if (!snapshot.hasData) {
-                                return new CircularProgressIndicator();
+                                return const CircularProgressIndicator();
                               }
                               var document = snapshot.data;
                               return Container(
-                                margin: EdgeInsets.only(top: 10),
+                                margin: const EdgeInsets.only(top: 10),
                                 child: InkWell(
                                   onTap: selectImage,
                                   child: Align(
@@ -108,7 +121,8 @@ class _MyProfileState extends State<MyProfile> {
                                       ),
                                       child: CircleAvatar(
                                         radius: 80,
-                                        backgroundImage: NetworkImage(document['photo'].toString()),
+                                        backgroundImage: NetworkImage(
+                                            document['photo'].toString()),
                                       ),
                                     ),
                                   ),
@@ -117,32 +131,37 @@ class _MyProfileState extends State<MyProfile> {
                             }),
                         TextButton(
                             onPressed: dialog,
-                            child: Text(
+                            child: const Text(
                               "Update Image",
                               style: TextStyle(color: Color(0xff246A73)),
                             )),
                         Padding(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             top: 8,
                           ),
                           child: StreamBuilder(
-                              stream:
-                                  FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
+                              stream: FirebaseFirestore.instance
+                                  .collection("users")
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .snapshots(),
                               builder: (context, AsyncSnapshot snapshot) {
                                 if (!snapshot.hasData) {
-                                  return new CircularProgressIndicator();
+                                  return const CircularProgressIndicator();
                                 }
                                 var document = snapshot.data;
                                 return Text(
                                   document['name'],
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      color: Color(0xff160F29), fontWeight: FontWeight.w600, fontFamily: "ProximaNova", fontSize: 18),
+                                  style: const TextStyle(
+                                      color: Color(0xff160F29),
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: "ProximaNova",
+                                      fontSize: 18),
                                 );
                               }),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                       ],
@@ -153,15 +172,16 @@ class _MyProfileState extends State<MyProfile> {
             ),
           ),
           Container(
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6)),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(6)),
             height: 119,
             width: 343,
             // padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-            margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+            margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Image.asset(
@@ -170,10 +190,10 @@ class _MyProfileState extends State<MyProfile> {
                   width: 58,
                   fit: BoxFit.cover,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
-                Container(
+                const SizedBox(
                   width: 210,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,11 +201,13 @@ class _MyProfileState extends State<MyProfile> {
                     children: [
                       Text(
                         "No Connection Yet!",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
                       ),
                       Text(
                         "Meet other users and scan their QR Codes to connect.",
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 14),
                       ),
                     ],
                   ),
@@ -193,8 +215,8 @@ class _MyProfileState extends State<MyProfile> {
                 Container(
                   width: 24,
                   height: 24,
-                  margin: EdgeInsets.only(top: 20),
-                  child: Align(
+                  margin: const EdgeInsets.only(top: 20),
+                  child: const Align(
                     alignment: Alignment.topRight,
                     child: Text(
                       "",
@@ -205,15 +227,16 @@ class _MyProfileState extends State<MyProfile> {
             ),
           ),
           Container(
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6)),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(6)),
               height: 119,
               width: 343,
               // padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-              margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+              margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Image.asset(
@@ -222,10 +245,10 @@ class _MyProfileState extends State<MyProfile> {
                     width: 58,
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
-                  Container(
+                  const SizedBox(
                     width: 210,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,17 +256,19 @@ class _MyProfileState extends State<MyProfile> {
                       children: [
                         Text(
                           "No invite yet!",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           "Invite your friend and experience the events in your area together.",
-                          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 14),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 20, right: 10),
+                    margin: const EdgeInsets.only(top: 20, right: 10),
                     child: Align(
                       alignment: Alignment.topRight,
                       child: Image.asset(
@@ -274,7 +299,7 @@ class _MyProfileState extends State<MyProfile> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Update Image'),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text('Do you want to update your profile image'),
@@ -290,10 +315,16 @@ class _MyProfileState extends State<MyProfile> {
                 ),
               ),
               onPressed: () async {
-                String photoURL = await StorageServices().uploadImageToStorage('ProfilePics', _image!, false);
-                FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({"photo": photoURL});
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Image Updated Succesfully")));
-                Navigator.push(context, MaterialPageRoute(builder: (builder) => MainScreen()));
+                String photoURL = await StorageServices()
+                    .uploadImageToStorage('ProfilePics', _image!, false);
+                FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .update({"photo": photoURL});
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Image Updated Succesfully")));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (builder) => MainScreen()));
               },
             ),
             TextButton(
