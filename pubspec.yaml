@@ -37,6 +37,8 @@ dependencies:
   firebase_auth: ^4.6.3
   firebase_core: ^2.14.0
   firebase_storage: ^11.2.3
+  flutter_easyloading: ^3.0.5
+  timeago: ^3.5.0
   flutter:
     sdk: flutter
   flutter_google_places_hoc081098: ^1.2.0

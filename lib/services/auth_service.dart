@@ -24,7 +24,11 @@ class AuthServices {
       //Add User to the database with modal
 
       await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).set(
-        {"email": FirebaseAuth.instance.currentUser!.email, "uid": FirebaseAuth.instance.currentUser!.uid},
+        {
+          "email": FirebaseAuth.instance.currentUser!.email,
+          "uid": FirebaseAuth.instance.currentUser!.uid,
+          "friends": [],
+        },
       );
       res = 'success';
       debugPrint(res);
@@ -40,7 +44,11 @@ class AuthServices {
       //Add User to the database with modal
 
       await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).set(
-        {"phone": FirebaseAuth.instance.currentUser!.phoneNumber.toString(), "uid": FirebaseAuth.instance.currentUser!.uid},
+        {
+          "phone": FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
+          "uid": FirebaseAuth.instance.currentUser!.uid,
+          "friends": [],
+        },
       );
       res = 'success';
       debugPrint(res);

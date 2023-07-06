@@ -9,8 +9,7 @@ class Dialogs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(14.0))),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0))),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[

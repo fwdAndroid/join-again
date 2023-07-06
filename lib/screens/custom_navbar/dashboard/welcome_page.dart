@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
@@ -12,7 +13,9 @@ import 'package:join/screens/custom_navbar/dashboard/widgets/welcome_screen_head
 
 import '../../activities/activity/geo_service.dart';
 import '../../filters/filters.dart';
+import '../../friends/friends_screen.dart';
 import '../../notification/notiy.dart';
+import '../../requests/request_screen.dart';
 
 //todo please fix padding problem
 class WelComePage extends StatefulWidget {
@@ -25,8 +28,7 @@ class WelComePage extends StatefulWidget {
 class _WelComePageState extends State<WelComePage> {
   String googleApikey = "AIzaSyBffT8plN_Vdcd308KgmzIfGVQN6q-CkAo";
   GoogleMapController? mapController;
-  CameraPosition cameraPosition =
-      const CameraPosition(target: LatLng(51.1657, 10.4515));
+  CameraPosition cameraPosition = const CameraPosition(target: LatLng(51.1657, 10.4515));
   bool _isLoading = false;
   List latlong = [];
   String location = 'Please move map to A specific location.';
@@ -43,18 +45,13 @@ class _WelComePageState extends State<WelComePage> {
   init() async {
     await getUserCurrentLocation().then((value) async {
       print("value.latitude:${value.latitude}");
-      markers.add(Marker(
-          markerId: MarkerId("2"),
-          position: LatLng(value.latitude, value.longitude)));
-      CameraPosition cameraPosition = CameraPosition(
-          target: LatLng(value.latitude, value.longitude), zoom: 14);
+      markers.add(Marker(markerId: MarkerId("2"), position: LatLng(value.latitude, value.longitude)));
+      CameraPosition cameraPosition = CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 14);
 
       await loadCustomMarkerIcon();
       await fetchLocationData();
       await getLatLong();
-      mapController!
-          .animateCamera(CameraUpdate.newCameraPosition(cameraPosition))
-          .then((value) {
+      mapController!.animateCamera(CameraUpdate.newCameraPosition(cameraPosition)).then((value) {
         print('animated');
       });
       setState(() {});
@@ -92,8 +89,7 @@ class _WelComePageState extends State<WelComePage> {
   List<Marker> markers = [];
 
   Future<void> fetchLocationData() async {
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('activity').get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('activity').get();
     setState(() {
       markers = querySnapshot.docs.map((doc) {
         double latitude = doc['latitude'];
@@ -109,9 +105,7 @@ class _WelComePageState extends State<WelComePage> {
 
   @override
   Widget build(BuildContext context) {
-    LatLng startLocation = _isLoading
-        ? const LatLng(51.1657, 10.4515)
-        : LatLng(latlong[0], latlong[1]);
+    LatLng startLocation = _isLoading ? const LatLng(51.1657, 10.4515) : LatLng(latlong[0], latlong[1]);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width, 182),
@@ -119,16 +113,10 @@ class _WelComePageState extends State<WelComePage> {
           backgroundColor: const Color.fromARGB(19, 246, 246, 244),
           elevation: 6,
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20))),
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
           title: const Text(
             "Welcome to JOIN",
-            style: TextStyle(
-                fontFamily: "ProximaNova",
-                fontWeight: FontWeight.w700,
-                fontSize: 17,
-                color: Color(0xff160F29)),
+            style: TextStyle(fontFamily: "ProximaNova", fontWeight: FontWeight.w700, fontSize: 17, color: Color(0xff160F29)),
             overflow: TextOverflow.ellipsis,
           ),
           leading: Padding(
@@ -140,8 +128,7 @@ class _WelComePageState extends State<WelComePage> {
           actions: [
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (builder) => Filters()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => Filters()));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -150,14 +137,41 @@ class _WelComePageState extends State<WelComePage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (builder) => Noti()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => Noti()));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset("assets/noti.png"),
               ),
             ),
+            InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const RequestScreen()));
+                },
+                child: const Icon(Icons.person)),
+            const SizedBox(width: 20),
+            StreamBuilder<DocumentSnapshot>(
+                stream: FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  var userList = snapshot.data!.data() as Map<String, dynamic>;
+                  return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => FriendsScreen(
+                              userList: userList['friends'],
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Icon(Icons.group));
+                }),
           ],
           flexibleSpace: const WelcomeScreenHorizontalHeader(),
         ),
@@ -183,19 +197,15 @@ class _WelComePageState extends State<WelComePage> {
                 cameraPosition = cameraPositiona;
               },
               onCameraIdle: () async {
-                List<Placemark> addresses = await placemarkFromCoordinates(
-                    cameraPosition.target.latitude,
-                    cameraPosition.target.longitude);
+                List<Placemark> addresses = await placemarkFromCoordinates(cameraPosition.target.latitude, cameraPosition.target.longitude);
 
                 var first = addresses.first;
                 print("${first.name} : ${first..administrativeArea}");
 
-                List<Placemark> placemarks = await placemarkFromCoordinates(
-                    cameraPosition.target.latitude,
-                    cameraPosition.target.longitude);
+                List<Placemark> placemarks =
+                    await placemarkFromCoordinates(cameraPosition.target.latitude, cameraPosition.target.longitude);
                 Placemark place = placemarks[0];
-                location =
-                    '${place.street},${place.subLocality},${place.locality},${place.thoroughfare},';
+                location = '${place.street},${place.subLocality},${place.locality},${place.thoroughfare},';
 
                 setState(() {
                   _locationController.text = location;
@@ -237,8 +247,7 @@ class _WelComePageState extends State<WelComePage> {
       _isLoading = true;
     });
     await Geolocator.requestPermission().then((value) async {
-      print(
-          'getUserCurrentLocation:$value:${await Geolocator.getCurrentPosition()}');
+      print('getUserCurrentLocation:$value:${await Geolocator.getCurrentPosition()}');
     }).onError((error, stackTrace) {
       print("error" + error.toString());
     });
