@@ -6,7 +6,9 @@ class CustomRequestCardForReceivedRequest extends StatelessWidget {
   final dynamic userSnap;
   final dynamic createdData;
   final dynamic data;
-  const CustomRequestCardForReceivedRequest({Key? key, this.userSnap, this.createdData, this.data}) : super(key: key);
+  const CustomRequestCardForReceivedRequest(
+      {Key? key, this.userSnap, this.createdData, this.data})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,9 @@ class SuggestionButton extends StatelessWidget {
   final String? title;
   final Function()? onPressed;
   final Color? borderColor;
-  const SuggestionButton({Key? key, this.title, this.onPressed, this.borderColor}) : super(key: key);
+  const SuggestionButton(
+      {Key? key, this.title, this.onPressed, this.borderColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
