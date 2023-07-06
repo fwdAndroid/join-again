@@ -16,11 +16,11 @@ class _FiltersState extends State<Filters> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 225, 243, 246),
+      backgroundColor: const Color.fromARGB(255, 225, 243, 246),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         centerTitle: true,
-        title: Text("Setting"),
+        title: const Text("Setting"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +30,7 @@ class _FiltersState extends State<Filters> {
               'Public Location',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            subtitle: Text(
+            subtitle: const Text(
               "Your Location is now public and you will be shown to other users on the map",
               style: TextStyle(fontSize: 12),
             ),
@@ -41,8 +41,8 @@ class _FiltersState extends State<Filters> {
               });
             },
           ),
-          Divider(),
-          ListTile(
+          const Divider(),
+          const ListTile(
             title: Text(
               "Anonymize your location 150m",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -53,7 +53,7 @@ class _FiltersState extends State<Filters> {
             ),
           ),
           Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Slider(
                   value: valueHolder.toDouble(),
                   min: 1,
@@ -71,9 +71,9 @@ class _FiltersState extends State<Filters> {
                     return '${newValue.round()}';
                   })),
           Container(
-            margin: EdgeInsets.only(left: 10),
+            margin: const EdgeInsets.only(left: 10),
             padding: const EdgeInsets.all(8.0),
-            child: Text(
+            child: const Text(
               "Age 17-37",
               style: TextStyle(
                   color: Colors.black,
@@ -82,7 +82,7 @@ class _FiltersState extends State<Filters> {
             ),
           ),
           Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Slider(
                   value: valueHolder.toDouble(),
                   min: 1,
@@ -99,7 +99,7 @@ class _FiltersState extends State<Filters> {
                   semanticFormatterCallback: (double newValue) {
                     return '${newValue.round()}';
                   })),
-          Divider(),
+          const Divider(),
           SwitchListTile(
             title: const Text(
               'Show Users',
@@ -112,7 +112,7 @@ class _FiltersState extends State<Filters> {
               });
             },
           ),
-          Divider(),
+          const Divider(),
           SwitchListTile(
             title: const Text(
               'Show Events',
@@ -125,11 +125,11 @@ class _FiltersState extends State<Filters> {
               });
             },
           ),
-          Divider(),
+          const Divider(),
           Container(
             margin: EdgeInsets.only(left: 10),
             padding: const EdgeInsets.all(8.0),
-            child: Text(
+            child: const Text(
               "Events in next 7 days",
               style: TextStyle(
                   color: Colors.black,
@@ -138,13 +138,13 @@ class _FiltersState extends State<Filters> {
             ),
           ),
           Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Slider(
                   value: valueHolder.toDouble(),
                   min: 1,
                   max: 150,
                   divisions: 100,
-                  activeColor: Color(0xff246A73),
+                  activeColor: const Color(0xff246A73),
                   inactiveColor: Colors.grey,
                   label: '${valueHolder.round()}',
                   onChanged: (double newValue) {
