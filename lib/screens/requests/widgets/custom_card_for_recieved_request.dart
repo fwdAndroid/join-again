@@ -12,8 +12,11 @@ class CustomRequestCardForReceivedRequest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Colors.grey, offset: Offset(0.1, 0.1))]),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 05),
         child: ListTile(

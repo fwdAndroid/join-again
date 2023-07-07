@@ -41,6 +41,8 @@ class _RequestScreenState extends State<RequestScreen> {
           automaticallyImplyLeading: false,
           // title: const Text("All Requests"),
           bottom: const TabBar(
+            indicatorColor: Color(0xFF246A73),
+            labelColor: Color(0xFF246A73),
             tabs: [
               Text("Send Requests"),
               Text("Receive Requests"),

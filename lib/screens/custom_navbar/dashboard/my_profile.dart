@@ -180,7 +180,7 @@ class _MyProfileState extends State<MyProfile> {
                                     return const CircularProgressIndicator();
                                   }
                                   var document = snapshot.data;
-                                  return Container(
+                                  return SizedBox(
                                     height: 70,
                                     width: 70,
                                     child: Stack(
@@ -196,8 +196,10 @@ class _MyProfileState extends State<MyProfile> {
                                                 begin: Alignment(-0.98, 0.18),
                                                 end: Alignment(0.98, -0.18),
                                                 colors: [
-                                                  Color(0xFFFF7E87),
+                                                  Color(0xFFFF7E87)
+                                                      .withOpacity(.6),
                                                   Color(0xFFFF6E78)
+                                                      .withOpacity(.7)
                                                 ],
                                               ),
                                               shape: OvalBorder(),
@@ -210,7 +212,7 @@ class _MyProfileState extends State<MyProfile> {
                                           child: Container(
                                             width: 70,
                                             height: 70,
-                                            decoration: ShapeDecoration(
+                                            decoration: const ShapeDecoration(
                                               gradient: LinearGradient(
                                                 begin: Alignment(-0.98, 0.18),
                                                 end: Alignment(0.98, -0.18),
@@ -226,40 +228,37 @@ class _MyProfileState extends State<MyProfile> {
                                         Positioned(
                                           left: 6.30,
                                           top: 6.30,
-                                          child: Container(
-                                            width: 57.40,
-                                            height: 57.40,
-                                            child: CircleAvatar(
-                                              radius: 80,
-                                              backgroundImage: NetworkImage(
-                                                  document['photo'].toString()),
+                                          child: InkWell(
+                                            onTap: selectImage,
+                                            child: SizedBox(
+                                              width: 57.40,
+                                              height: 57.40,
+                                              child: CircleAvatar(
+                                                radius: 80,
+                                                backgroundImage: NetworkImage(
+                                                    document['photo']
+                                                        .toString()),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        // Container(
-                                        //   margin:
-                                        //       const EdgeInsets.only(top: 10),
-                                        //   child: InkWell(
-                                        //     onTap: selectImage,
-                                        //     child: Align(
-                                        //       alignment: Alignment.center,
-                                        //       child: Container(
-                                        //         height: 61,
-                                        //         width: 61,
-                                        //         child:
-                                        //     ),
-                                        //   ),
-                                        // ),
+                                        Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: InkWell(
+                                              onTap: dialog,
+                                              child: SizedBox(
+                                                  width: 21,
+                                                  height: 21,
+                                                  child: Image.asset(
+                                                    "assets/profile.png",
+                                                    width: 21,
+                                                    height: 21,
+                                                  )),
+                                            ))
                                       ],
                                     ),
                                   );
                                 }),
-                            // TextButton(
-                            //     onPressed: dialog,
-                            //     child: const Text(
-                            //       "Update Image",
-                            //       style: TextStyle(color: Color(0xff246A73)),
-                            //     )),
                             Padding(
                               padding: const EdgeInsets.only(
                                 top: 8,
@@ -354,7 +353,7 @@ class _MyProfileState extends State<MyProfile> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Update Image'),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text('Do you want to update your profile image'),

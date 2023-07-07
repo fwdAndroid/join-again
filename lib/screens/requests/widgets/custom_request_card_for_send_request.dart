@@ -21,8 +21,24 @@ class CustomRequestCard extends StatelessWidget {
             radius: 25,
             child: Text(userSnap['name'][0].toString().toUpperCase()),
           ),
-          title: Text(userSnap['name']),
-          subtitle: Text(userSnap['phone']),
+          title: Text(
+            userSnap['name'],
+            style: const TextStyle(
+              fontFamily: "ProximaNova",
+              fontSize: 14,
+              color: Color(0xff160F29),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          subtitle: Text(
+            userSnap['phone'],
+            style: const TextStyle(
+              fontFamily: "ProximaNova",
+              fontSize: 12,
+              color: Color(0xff160F29),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
           trailing: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
